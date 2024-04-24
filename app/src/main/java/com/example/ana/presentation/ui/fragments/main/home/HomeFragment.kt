@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.btnText.visibility = View.INVISIBLE
             binding.childCard.visibility = View.VISIBLE
             binding.childName.text = prefs.getChildName()
-            binding.childAge.text = "${prefs.getChildAge()} y.o"
+            binding.childAge.text = "${prefs.getChildAge()}"
         }
     }
 
