@@ -1,12 +1,17 @@
 package com.example.ana.presentation.ui.fragments.main.home
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ana.databinding.FragmentHomeBinding
 import com.teenteen.teencash.presentation.base.BaseFragment
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun attachBinding(
@@ -34,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.btnText.visibility = View.INVISIBLE
             binding.childCard.visibility = View.VISIBLE
             binding.childName.text = prefs.getChildName()
-            binding.childAge.text = "${prefs.getChildAge()}"
+            binding.childAge.text = prefs.getChildAge()
         }
     }
 

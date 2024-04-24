@@ -57,7 +57,7 @@
             android:layout_marginTop="@dimen/dp_32"
             android:layout_marginBottom="@dimen/dp_32"
             app:hintTextColor="@color/grey"
-            android:hint="@string/age">
+            android:hint="00/00/0000">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input"

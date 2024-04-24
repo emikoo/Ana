@@ -1,11 +1,16 @@
 package com.example.ana.presentation.ui.fragments.main.home
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.example.ana.databinding.FragmentChildAuthBinding
 import com.teenteen.teencash.presentation.base.BaseFragment
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 
 class ChildAuthFragment : BaseFragment<FragmentChildAuthBinding>() {
 
@@ -23,7 +28,7 @@ class ChildAuthFragment : BaseFragment<FragmentChildAuthBinding>() {
                 Screen.AGE -> {
                     if (binding.input.text.toString().isNotBlank()) {
                         state = Screen.NAME
-                        prefs.saveChildAge(binding.input.text.toString())
+                        prefs.saveChildAge(calculateAge(binding.input.text.toString()))
                         binding.textField.hint = "Child's name"
                         binding.title.text = "What is your child’s name?"
                         binding.input.setText("")
@@ -43,6 +48,14 @@ class ChildAuthFragment : BaseFragment<FragmentChildAuthBinding>() {
                 Screen.DONE -> { findNavController().navigate(directions) }
             }
         }
+    }
+    fun calculateAge(birthDateString: String): String {
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val birthDate = LocalDate.parse(birthDateString, formatter)
+        val currentDate = LocalDate.now()
+        val age = Period.between(birthDate, currentDate)
+
+        return "${age.years} year, ${age.months} months, ${age.days} days"
     }
 
     override fun subscribeToLiveData() {}
