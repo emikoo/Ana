@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/dp_16"
+    android:elevation="@dimen/dp_0"
+    android:layout_marginStart="@dimen/dp_12"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/image"
+            android:layout_width="72dp"
+            app:cardCornerRadius="@dimen/dp_16"
+            android:elevation="@dimen/dp_0"
+            android:layout_margin="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="72dp">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/baby" />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:layout_constraintStart_toEndOf="@id/image"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginStart="@dimen/dp_12"
+            android:textColor="@color/purple"
+            android:textSize="13sp"
+            android:text="Балаңыздың іші\nаурады ма?"
+            android:fontFamily="@font/sf_pro_text_semibold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintStart_toEndOf="@id/image"
+            android:textColor="@color/grey"
+            android:layout_marginStart="@dimen/dp_12"
+            android:textSize="10sp"
+            android:text="@string/n1201_n"
+            android:fontFamily="@font/sf_pro_text_regular"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "465230869306",
+    "project_id": "anake-5a71b",
+    "storage_bucket": "anake-5a71b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465230869306:android:ab49896af1f35b07c21603",
+        "android_client_info": {
+          "package_name": "com.example.ana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhMjKJ4BCaRNiSVWxmkftqY0zD6CqqPDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

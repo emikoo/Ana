@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Ana</string>
+    <string name="next">Next</string>
+    <string name="welcome">Добро пожаловать в Ana!</string>
+    <string name="subtitle_onboarding1">Ana - безопасное пространство для женщин. встретиться и найти поддержку.</string>
+    <string name="title_onboarding2">Платформа все в одном</string>
+    <string name="subtitle_onboarding2">Общайтесь с женщинами, которые находятся на аналогичном этапе жизни – от фертильности, беременности и материнства до менопаузы.</string>
+    <string name="title_onboarding3">Безопасное пространство</string>
+    <string name="subtitle_onboarding3"><![CDATA[Ana предоставляет доступ к сообществу, которое готово выслушать, поделиться информацией и дать ценный совет ]]></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Начать</string>
+    <string name="policy">Please keep your username and password confidential. By continuing, you accept <font color='#F29B27'>Ana\'s policies</font> and <font color='#F29B27'>terms and conditions</font></string>
+    <string name="authorization">Authorization</string>
+    <string name="by_phone_number">By phone number</string>
+    <string name="error_phone_number1">Укажите номер для выбранной страны</string>
+    <string name="phone_number">Phone number</string>
+    <string name="get_code">Get code</string>
+    <string name="sign_in">Sign In</string>
+    <string name="russian">Russian</string>
+    <string name="type_sms_code">Введите код из СМС</string>
+    <string name="what_s_your_name">What’s your name?</string>
+    <string name="weekly_advices">Weekly advices</string>
+    <string name="popular">Popular</string>
+    <string name="n1200_n"><font color='#4A4562'>Доктор Комаровский</font>\n1200 просмотров\nВчера</string>
+    <string name="n1201_n"><font color='#4A4562'>Dr. Komarovsky</font>\n1,200 views | Yesterday</string>
+    <string name="age">Child\'s age</string>
+</resources>
