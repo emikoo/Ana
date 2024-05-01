@@ -1,15 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.fragments.main.chat.ChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Chat" />
+        android:layout_height="68dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#D9D2FF"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:textSize="17sp"
+        android:textColor="@color/dark"
+        app:layout_constraintTop_toTopOf="@id/top_view"
+        app:layout_constraintStart_toStartOf="@id/top_view"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_32"
+        android:text="Your consultant"/>
+
+    <TextView
+        android:id="@+id/online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/dark"
+        android:fontFamily="@font/sf_pro_display_regular"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:text="Online"/>
+    
+    <ImageButton
+        android:id="@+id/dots"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        app:layout_constraintEnd_toEndOf="@id/top_view"
+        app:layout_constraintTop_toTopOf="@id/top_view"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
+        android:background="@drawable/ic_dots"
+        android:layout_marginEnd="@dimen/dp_16"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="@dimen/dp_8"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        app:layout_constraintBottom_toTopOf="@id/bottom_view"/>
+
+    <View
+        android:id="@+id/bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#D9D2FF"/>
+    
+    <ImageButton
+        android:id="@+id/file_attach"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        app:layout_constraintTop_toTopOf="@id/bottom_view"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_view"
+        app:layout_constraintStart_toStartOf="@id/bottom_view"
+        android:background="@drawable/ic_attach"
+        android:layout_marginStart="@dimen/dp_16"/>
+    
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintTop_toTopOf="@id/bottom_view"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_view"
+        app:layout_constraintStart_toEndOf="@id/file_attach"
+        app:layout_constraintEnd_toStartOf="@id/send"
+        android:hint="@string/message"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:textCursorDrawable="@drawable/ic_cursor"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/bg_message_filled"/>
+
+    <ImageButton
+        android:id="@+id/send"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="@id/bottom_view"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@drawable/ic_send"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

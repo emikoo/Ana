@@ -9,18 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.ana.data.local.PrefsSettings
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
 
     private var _binding: VB_CHILD? = null
     lateinit var binding: VB_CHILD
-//    lateinit var progressDialog: Dialog
     lateinit var prefs: PrefsSettings
     lateinit var auth: FirebaseAuth
     lateinit var db: FirebaseFirestore
-//    var currentUser: FirebaseUser? = null
-//    lateinit var usersCollection: CollectionReference
+    var currentUser: FirebaseUser? = null
+    lateinit var usersCollection: CollectionReference
 
     override fun onCreateView(
         inflater: LayoutInflater ,
@@ -54,9 +55,8 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
         db = FirebaseFirestore.getInstance()
         prefs = PrefsSettings(requireActivity())
         auth = FirebaseAuth.getInstance()
-//        currentUser = firebaseAuth.currentUser
-//        progressDialog = ProgressDialog.progressDialog(requireActivity())
-//        usersCollection = db.collection("users")
+        currentUser = auth.currentUser
+        usersCollection = db.collection("users")
     }
 
     override fun onDestroy() {

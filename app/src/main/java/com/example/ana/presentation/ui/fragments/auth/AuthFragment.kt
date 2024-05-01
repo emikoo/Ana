@@ -14,10 +14,13 @@ import com.example.ana.databinding.FragmentAuthBinding
 import com.example.ana.presentation.extensions.activityNavController
 import com.example.ana.presentation.extensions.navigateSafely
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.teenteen.teencash.presentation.base.BaseFragment
 import java.util.concurrent.TimeUnit
 
@@ -88,6 +91,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 Screen.NAME -> {
                     prefsSettings.saveName(binding.input.text.toString())
                     prefs.setFirstTimeLaunch(PrefsSettings.USER)
+                    prefsSettings.saveCurrentUserId(auth.uid)
                     activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
                 }
             }
@@ -158,12 +162,11 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            // This will be invoked if the code is automatically detected or the phone number is instantly verified
+//            addUserToFirestore(FirebaseAuth.getInstance().currentUser)
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // Handle errors (invalid phone number, quota exceeded, etc.)
             Log.w("AuthFragment", "onVerificationFailed", e)
         }
 
@@ -171,7 +174,6 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken
         ) {
-            // Store the verification ID and resending token so we can use them later
             storedVerificationId = verificationId
             resendToken = token
             setCodeView()
@@ -179,9 +181,13 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     private fun verifyVerificationCode(code: String) {
-        // Create a credential using the code and the verification ID
         val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
         signInWithPhoneAuthCredential(credential)
+    }
+
+    fun addUserToFirestore() {
+        val phone = binding.input.text.toString()
+        usersCollection.document().set(mapOf("phone" to phone))
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -192,6 +198,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     Log.d("AuthFragment", "signInWithCredential:success")
                     val user = task.result?.user
                     prefsSettings.savePhoneNumber(binding.input.text.toString())
+                    addUserToFirestore()
                     setNameView()
                 } else {
                     // Sign in failed, handle the error

@@ -1,60 +1,87 @@
 package com.example.ana.presentation.ui.fragments.main.chat
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.ana.R
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ana.data.model.ChatMessage
+import com.example.ana.data.model.Message
+import com.example.ana.data.model.MessageType
+import com.example.ana.data.model.formatMessageTime
+import com.example.ana.databinding.FragmentChatBinding
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentChange
+import com.teenteen.teencash.presentation.base.BaseFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ChatFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var adapter: MessageAdapter
+    private lateinit var chatMessages: MutableList<ChatMessage>
+    private lateinit var viewModel: ChatViewModel
+    override fun attachBinding(
+        list: MutableList<FragmentChatBinding>,
+        layoutInflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean
+    ) {
+        list.add(FragmentChatBinding.inflate(layoutInflater, container, attachToRoot))
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun setupViews() {
+        chatMessages = mutableListOf()
+        adapter = MessageAdapter(chatMessages)
+        viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
+        binding.rvChat.adapter = adapter
+        binding.rvChat.layoutManager = LinearLayoutManager(requireContext())
+        binding.send.setOnClickListener {
+            val messageText = binding.etMessage.text.trim().toString()
+            if (messageText.isNotEmpty()) {
+                sendMessageToFirestore(messageText)
+                binding.etMessage.setText("")
+            }
+//            setupMessageListener()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+    fun sendMessageToFirestore(message: String) {
+        val messageMap = hashMapOf(
+            "prompt" to message,
+            "senderId" to prefs.getCurrentUserId(),
+            "timestampFull" to formatMessageTime(Timestamp.now(), true),
+            "timestampShort" to formatMessageTime(Timestamp.now(), false)
+        )
+        db.collection("users").document(prefs.getCurrentUserId()).collection("messages").add(messageMap)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ChatFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun subscribeToLiveData() {
+        setupMessageListener()
+    }
+    fun setupMessageListener() {
+        db.collection("users").document(prefs.getCurrentUserId()).collection("messages").orderBy("timestampFull")
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.w("ChatFragment", "listen:error", e)
+                    return@addSnapshotListener
+                }
+
+                for (dc in snapshots!!.documentChanges) {
+                    if (dc.type == DocumentChange.Type.ADDED) {
+                        val message = dc.document.toObject(Message::class.java)
+                        val user = ChatMessage(parentMessageId = message.parentMessageId, senderId = message.senderId,
+                        response = "", prompt = message.prompt, timestampFull = message.timestampFull, timestampShort = message.timestampShort, type = MessageType.USER)
+                        val bot = ChatMessage(parentMessageId = message.parentMessageId, senderId = message.senderId,
+                            response = message.response, prompt = "", timestampFull = message.timestampFull, timestampShort = message.timestampShort, type = MessageType.BOT)
+                        updateUIWithNewMessage(user)
+                        updateUIWithNewMessage(bot)
+                    }
                 }
             }
+    }
+
+    fun updateUIWithNewMessage(message: ChatMessage) {
+        chatMessages.add(message)
+        adapter.notifyItemInserted(chatMessages.size - 1)
+        binding.rvChat.scrollToPosition(chatMessages.size - 1)
     }
 }

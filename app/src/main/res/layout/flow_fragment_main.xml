@@ -11,9 +11,9 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
+        android:paddingBottom="72dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_graph" />
 
@@ -21,7 +21,7 @@
         android:id="@+id/bottom_navigation"
         style="@style/BottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         app:labelVisibilityMode="labeled"
         android:backgroundTint="#F7F7F7"
         app:layout_constraintBottom_toBottomOf="parent"

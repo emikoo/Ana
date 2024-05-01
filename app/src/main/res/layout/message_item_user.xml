@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="end"
+    android:gravity="end"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/message_background_user"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:paddingTop="@dimen/dp_24"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_8"
+        android:textColor="#112042"
+        android:textSize="16sp"
+        tools:text="dkjahfkjdshjkfhsdkj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#817C7C"
+        android:layout_marginTop="@dimen/dp_12"
+        android:textSize="10sp"
+        tools:text="4:14"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:layout_marginEnd="@dimen/dp_16"
+        app:layout_constraintEnd_toEndOf="@id/textMessage"
+        app:layout_constraintTop_toTopOf="@id/textMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
