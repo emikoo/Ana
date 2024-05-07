@@ -21,11 +21,13 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
             MessageType.USER -> ViewType.USER_MESSAGE.ordinal
             MessageType.BOT -> ViewType.BOT_MESSAGE.ordinal
             MessageType.TYPING -> ViewType.TYPING_INDICATOR.ordinal
+            else -> {ViewType.USER_MESSAGE.ordinal}
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
+//        return UserMessageViewHolder(inflater.inflate(R.layout.message_item_user, parent, false))
         return when(viewType) {
             ViewType.USER_MESSAGE.ordinal -> UserMessageViewHolder(inflater.inflate(R.layout.message_item_user, parent, false))
             ViewType.BOT_MESSAGE.ordinal -> BotMessageViewHolder(inflater.inflate(R.layout.message_item_bot, parent, false))
@@ -44,12 +46,19 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
 
     override fun getItemCount() = messages.size
 
+    fun removeLastItem() {
+        if (messages.isNotEmpty()) {
+            messages.removeAt(messages.size - 1)
+            notifyItemRemoved(messages.size - 1)
+        }
+    }
+
     class UserMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val messageTextView: TextView = itemView.findViewById(R.id.textMessage)
         private val timeTextView: TextView = itemView.findViewById(R.id.textTime)
 
         fun bind(message: ChatMessage) {
-            messageTextView.text = message.prompt
+            messageTextView.text = "   ${message.prompt}"
             timeTextView.text = message.timestampShort
         }
     }

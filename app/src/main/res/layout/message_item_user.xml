@@ -32,9 +32,41 @@
         android:layout_marginTop="@dimen/dp_12"
         android:textSize="10sp"
         tools:text="4:14"
+        android:paddingStart="@dimen/dp_16"
         android:fontFamily="@font/sf_pro_display_regular"
         android:layout_marginEnd="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="@id/textMessage"
         app:layout_constraintTop_toTopOf="@id/textMessage" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/respondMessage"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/message_background_bot"-->
+<!--        android:textColor="#112042"-->
+<!--        android:fontFamily="@font/sf_pro_display_regular"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_marginTop="@dimen/dp_16"-->
+<!--        android:paddingEnd="@dimen/dp_16"-->
+<!--        android:paddingTop="@dimen/dp_24"-->
+<!--        android:paddingStart="@dimen/dp_16"-->
+<!--        tools:text="dkjahfkjdshjkfhsdkj"-->
+<!--        android:paddingBottom="@dimen/dp_8"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/textMessage" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/respondTime"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#817C7C"-->
+<!--        android:layout_marginTop="@dimen/dp_12"-->
+<!--        android:textSize="10sp"-->
+<!--        tools:text="4:15"-->
+<!--        android:paddingEnd="@dimen/dp_16"-->
+<!--        android:fontFamily="@font/sf_pro_display_regular"-->
+<!--        android:layout_marginStart="@dimen/dp_16"-->
+<!--        app:layout_constraintStart_toStartOf="@id/respondMessage"-->
+<!--        app:layout_constraintTop_toTopOf="@id/respondMessage" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

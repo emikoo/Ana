@@ -13,6 +13,7 @@ import com.example.ana.data.local.PrefsSettings
 import com.example.ana.databinding.FragmentAuthBinding
 import com.example.ana.presentation.extensions.activityNavController
 import com.example.ana.presentation.extensions.navigateSafely
+import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teenteen.teencash.presentation.base.BaseFragment
 import java.util.concurrent.TimeUnit
@@ -30,10 +32,10 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var prefsSettings: PrefsSettings
     private var state = Screen.PHONE_NUMBER
+    var phoneNumber = ""
+    var userName = ""
 
-    enum class Screen {
-        PHONE_NUMBER, CODE, NAME
-    }
+    enum class Screen { PHONE_NUMBER, CODE, NAME }
 
     override fun attachBinding(
         list: MutableList<FragmentAuthBinding>,
@@ -51,7 +53,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.signin.setOnClickListener {
             when (state) {
                 Screen.PHONE_NUMBER -> {
-                    val phoneNumber = binding.input.text.toString()
+                    phoneNumber = binding.input.text.toString()
                     startPhoneNumberVerification(phoneNumber)
                     if (phoneNumber.isBlank()) {
                         binding.error.setTextColor(resources.getColor(R.color.red))
@@ -59,20 +61,8 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     }
                     binding.input.addTextChangedListener(object : TextWatcher {
                         override fun afterTextChanged(s: Editable?) {}
-                        override fun beforeTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            count: Int,
-                            after: Int
-                        ) {
-                        }
-
-                        override fun onTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            before: Int,
-                            count: Int
-                        ) {
+                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                             binding.error.setTextColor(resources.getColor(R.color.grey))
                             binding.error.text = "Пожалуйста пишите в формате +7##########"
                         }
@@ -89,25 +79,25 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 }
 
                 Screen.NAME -> {
-                    prefsSettings.saveName(binding.input.text.toString())
+                    userName =binding.input.text.toString()
+                    prefsSettings.saveName(userName)
                     prefs.setFirstTimeLaunch(PrefsSettings.USER)
                     prefsSettings.saveCurrentUserId(auth.uid)
+                    addUserToFirestore()
                     activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
                 }
             }
         }
         binding.btnBack.setOnClickListener {
             when (state) {
-                Screen.CODE -> {
-                    setPhoneView()
-                }
-
+                Screen.CODE -> { setPhoneView() }
                 Screen.PHONE_NUMBER -> TODO()
-                Screen.NAME -> {
-                    setCodeView()
-                }
-            }
-        }
+                Screen.NAME -> { setCodeView() } } }
+    }
+
+    private fun verifyVerificationCode(code: String) {
+        val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
+        signInWithPhoneAuthCredential(credential)
     }
 
     private fun setCodeView() {
@@ -152,17 +142,16 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     private fun startPhoneNumberVerification(phoneNumber: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)         // Phone number to verify
-            .setTimeout(60L, TimeUnit.SECONDS)   // Timeout duration
-            .setActivity(requireActivity())      // Activity (for callback binding)
-            .setCallbacks(callbacks)             // OnVerificationStateChangedCallbacks
+            .setPhoneNumber(phoneNumber)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(requireActivity())
+            .setCallbacks(callbacks)
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-//            addUserToFirestore(FirebaseAuth.getInstance().currentUser)
             signInWithPhoneAuthCredential(credential)
         }
 
@@ -170,44 +159,35 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             Log.w("AuthFragment", "onVerificationFailed", e)
         }
 
-        override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
-        ) {
+        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
             storedVerificationId = verificationId
             resendToken = token
             setCodeView()
         }
     }
 
-    private fun verifyVerificationCode(code: String) {
-        val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
-        signInWithPhoneAuthCredential(credential)
-    }
-
-    fun addUserToFirestore() {
-        val phone = binding.input.text.toString()
-        usersCollection.document().set(mapOf("phone" to phone))
-    }
-
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success
-                    Log.d("AuthFragment", "signInWithCredential:success")
+                    Log.d(Companion.TAG, "signInWithCredential:success")
                     val user = task.result?.user
-                    prefsSettings.savePhoneNumber(binding.input.text.toString())
-                    addUserToFirestore()
+                    prefsSettings.savePhoneNumber(phoneNumber)
                     setNameView()
                 } else {
-                    // Sign in failed, handle the error
-                    Log.w("AuthFragment", "signInWithCredential:failure", task.exception)
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
                     }
-
                 }
             }
+    }
+
+    fun addUserToFirestore() {
+        auth.uid?.let { usersCollection.document(it).set(mapOf("phone" to phoneNumber, "name" to userName))  }
+    }
+
+    companion object {
+        private const val TAG = "AuthFragment"
     }
 }

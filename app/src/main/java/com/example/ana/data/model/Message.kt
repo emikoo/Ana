@@ -1,6 +1,10 @@
 package com.example.ana.data.model
 
+import android.util.Log
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.firestore.DocumentSnapshot
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,7 +27,29 @@ data class ChatMessage(
     val timestampFull: String = formatMessageTime(Timestamp.now(), true),
     val timestampShort: String = formatMessageTime(Timestamp.now(), false),
     val status: Status? = null,
-    val type: MessageType)
+    val type: MessageType? = null) {
+
+    companion object {
+        fun DocumentSnapshot.toMessage(): ChatMessage? {
+            return try {
+                val parentMessageId = getString("parentMessageId") !!
+                val prompt = getString("prompt") !!
+                val response = getString("response") !!
+                val senderId = getString("senderId") !!
+                val timestampFull = getString("timestampFull") !!
+                val timestampShort = getString("timestampShort") !!
+                ChatMessage(parentMessageId, prompt, response, senderId, timestampFull, timestampShort)
+            } catch (e: Exception) {
+                Log.e(TAG , "Error converting message" , e)
+                FirebaseCrashlytics.getInstance().log("Error converting message")
+                FirebaseCrashlytics.getInstance().setCustomKey("senderId", id)
+                FirebaseCrashlytics.getInstance().recordException(e)
+                null
+            }
+        }
+        private const val TAG = "Message"
+    }
+}
 
 data class Status(
     val created_at: Timestamp = Timestamp.now(),
@@ -38,7 +64,7 @@ enum class MessageType {
 fun formatMessageTime(timestamp: Timestamp, full: Boolean): String {
     val millis = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
     val date = Date(millis)
-    val pattern = if (full) "dd MMM yyyy HH:mm" else "HH:mm"
+    val pattern = if (full) "dd MMM yyyy HH:mm:ss" else "HH:mm"
     val format = SimpleDateFormat(pattern, Locale.getDefault())
     return format.format(date)
 }

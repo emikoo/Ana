@@ -32,6 +32,7 @@
         android:layout_marginTop="@dimen/dp_12"
         android:textSize="10sp"
         tools:text="4:15"
+        android:paddingEnd="@dimen/dp_16"
         android:fontFamily="@font/sf_pro_display_regular"
         android:layout_marginStart="@dimen/dp_16"
         app:layout_constraintStart_toStartOf="@id/textMessage"
