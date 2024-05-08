@@ -29,6 +29,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     override fun setupViews() {
+        progressDialog.show()
         chatMessages = mutableListOf()
         adapter = MessageAdapter(chatMessages)
         viewModel = ViewModelProvider(this).get(MessagesViewModel::class.java)
@@ -39,6 +40,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             val messageText = binding.etMessage.text.trim().toString()
             if (messageText.isNotEmpty()) {
                 viewModel.sendMessage(prefs.getCurrentUserId(), messageText)
+                progressDialog.show()
                 viewModel.monitorLastMessage(prefs.getCurrentUserId(), messageText)
                 binding.etMessage.setText("")
             }
@@ -48,6 +50,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun subscribeToLiveData() {
         viewModel.messages.observe(viewLifecycleOwner) {
             setupMessageListener()
+            progressDialog.dismiss()
         }
         viewModel.lastMessage.observe(viewLifecycleOwner) { message ->
             message?.let {
@@ -113,6 +116,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         chatMessages.add(message)
         adapter.notifyItemInserted(chatMessages.size - 1)
         binding.rvChat.scrollToPosition(chatMessages.size - 1)
+        progressDialog.dismiss()
     }
 
 }

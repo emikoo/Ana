@@ -26,7 +26,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.teenteen.teencash.presentation.base.BaseFragment
 import java.util.concurrent.TimeUnit
 
-
 class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     private var storedVerificationId: String? = null
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken

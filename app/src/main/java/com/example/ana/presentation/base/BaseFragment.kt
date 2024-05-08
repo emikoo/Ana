@@ -1,13 +1,17 @@
 package com.teenteen.teencash.presentation.base
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.ana.R
 import com.example.ana.data.local.PrefsSettings
+import com.example.ana.presentation.utills.ProgressDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
@@ -22,6 +26,7 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
     lateinit var db: FirebaseFirestore
     var currentUser: FirebaseUser? = null
     lateinit var usersCollection: CollectionReference
+    lateinit var progressDialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater ,
@@ -51,11 +56,14 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
     abstract fun setupViews()
     abstract fun subscribeToLiveData()
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun init() {
         db = FirebaseFirestore.getInstance()
         prefs = PrefsSettings(requireActivity())
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser
+        progressDialog = ProgressDialog.progressDialog(requireActivity())
+        val draw: Drawable? = requireActivity().getDrawable(R.drawable.custom_progressbar)
         usersCollection = db.collection("users")
     }
 
