@@ -55,6 +55,7 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
 
                 Screen.NAME -> {
                     if (binding.input.text.toString().isNotBlank()) setupImageScreen()
+                    else Toast.makeText(requireContext(), "Please write the name or nickname :)", Toast.LENGTH_LONG).show()
                 }
 
                 Screen.IMAGE -> {
