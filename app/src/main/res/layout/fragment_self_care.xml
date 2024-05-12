@@ -1,15 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_meditation"
     tools:context=".presentation.ui.fragments.main.care.SelfCareFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Self-care" />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/ic_logo"
+        android:backgroundTint="@color/white"
+        android:text="@string/hello_blank_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageButton
+        android:id="@+id/btn_notification"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@drawable/ic_notification"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_search"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/ic_search"
+        app:layout_constraintEnd_toStartOf="@id/btn_notification"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_care"
+        tools:itemCount="5"
+        android:layout_marginBottom="@dimen/dp_12"
+        app:layout_constraintBottom_toTopOf="@id/premium_view" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        app:layout_constraintTop_toTopOf="@id/premium_view"
+        app:layout_constraintBottom_toBottomOf="@id/premium_view"
+        app:layout_constraintEnd_toEndOf="@id/premium_view"
+        android:background="@drawable/bg_view_care"
+        android:layout_marginEnd="@dimen/dp_24"
+        android:backgroundTint="#80493A97"
+        style="@style/ButtonText"
+        android:text="@string/subscribe"/>
+
+    <View
+        android:id="@+id/premium_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_view_care"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"/>
+
+    <TextView
+        android:id="@+id/premium_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/premium_view"
+        app:layout_constraintStart_toStartOf="@id/premium_view"
+        android:text="Premium"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_24"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/premium_title"
+        app:layout_constraintTop_toTopOf="@id/premium_title"
+        app:layout_constraintBottom_toBottomOf="@id/premium_title"
+        android:layout_marginStart="@dimen/dp_4"
+        android:background="@drawable/ic_crown"/>
+
+    <TextView
+        android:id="@+id/premium_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/premium_title"
+        app:layout_constraintStart_toStartOf="@id/premium_title"
+        app:layout_constraintBottom_toBottomOf="@id/premium_view"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:text="Take full advantage"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:fontFamily="@font/sf_pro_display_regular"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

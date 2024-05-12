@@ -11,8 +11,6 @@ class PrefsSettings(context: Context) {
     private val UID = "UID"
     private val PHONE_NUMBER = "PHONE_NUMBER"
     private val NAME = "NAME"
-    private val CHILD_NAME = "CHILD_NAME"
-    private val CHILD_AGE = "CHILD_AGE"
 
     fun setFirstTimeLaunch(isFirstTime: Int) {
         prefsEditor.putInt(IS_FIRST_TIME_LAUNCH , isFirstTime).commit()
@@ -43,23 +41,6 @@ class PrefsSettings(context: Context) {
     fun getName() : String {
         return prefs.getString(NAME, "") ?: ""
     }
-
-    fun saveChildName(name: String?) {
-        prefsEditor.putString(CHILD_NAME, name).apply()
-    }
-
-    fun getChildName() : String {
-        return prefs.getString(CHILD_NAME, "") ?: ""
-    }
-
-    fun saveChildAge(name: String?) {
-        prefsEditor.putString(CHILD_AGE, name).apply()
-    }
-
-    fun getChildAge() : String {
-        return prefs.getString(CHILD_AGE, "") ?: ""
-    }
-
     companion object {
         private const val PREFS_NAME = "Ana"
         const val FIRST_TIME = 1

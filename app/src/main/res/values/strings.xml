@@ -26,4 +26,9 @@
     <string name="n1201_n"><font color='#4A4562'>Dr. Komarovsky</font>\n1,200 views | Yesterday</string>
     <string name="age">Child\'s age</string>
     <string name="message">Message</string>
+    <string name="add_baby">Add baby</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="profile">Profile</string>
+    <string name="add_child">Add child</string>
+    <string name="skip">Skip</string>
 </resources>

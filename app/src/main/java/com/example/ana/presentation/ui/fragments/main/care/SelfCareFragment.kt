@@ -1,60 +1,35 @@
 package com.example.ana.presentation.ui.fragments.main.care
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.ana.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ana.databinding.FragmentSelfCareBinding
+import com.example.ana.presentation.ui.adapters.CareAdapter
+import com.teenteen.teencash.presentation.base.BaseFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SelfCareFragment : BaseFragment<FragmentSelfCareBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SelfCareFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SelfCareFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var adapter: CareAdapter
+    override fun setupViews() {
+        setupRecyclerView()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_self_care, container, false)
+    fun setupRecyclerView() {
+        adapter = CareAdapter()
+        binding.buttons.adapter = adapter
+        binding.buttons.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SelfCareFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SelfCareFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun subscribeToLiveData() {
     }
+
+    override fun attachBinding(
+        list: MutableList<FragmentSelfCareBinding>,
+        layoutInflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToRoot: Boolean
+    ) {
+        list.add(FragmentSelfCareBinding.inflate(layoutInflater, container, attachToRoot))
+    }
+
 }

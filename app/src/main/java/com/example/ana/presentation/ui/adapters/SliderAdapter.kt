@@ -1,4 +1,4 @@
-package com.example.ana.presentation.ui.fragments.onboarding
+package com.example.ana.presentation.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

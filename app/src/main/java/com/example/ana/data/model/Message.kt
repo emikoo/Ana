@@ -15,8 +15,7 @@ data class Message(
     val response: String = "",
     val senderId: String = "",
     val timestampFull: String = formatMessageTime(Timestamp.now(), true),
-    val timestampShort: String = formatMessageTime(Timestamp.now(), false),
-    val status: Status? = null
+    val timestampShort: String = formatMessageTime(Timestamp.now(), false)
 )
 
 data class ChatMessage(
@@ -26,7 +25,6 @@ data class ChatMessage(
     val senderId: String = "",
     val timestampFull: String = formatMessageTime(Timestamp.now(), true),
     val timestampShort: String = formatMessageTime(Timestamp.now(), false),
-    val status: Status? = null,
     val type: MessageType? = null) {
 
     companion object {
@@ -51,14 +49,8 @@ data class ChatMessage(
     }
 }
 
-data class Status(
-    val created_at: Timestamp = Timestamp.now(),
-    val state: String = "PROGRESS",
-    val updated_at: Timestamp = Timestamp.now()
-)
-
 enum class MessageType {
-    USER, BOT, TYPING
+    USER, BOT
 }
 
 fun formatMessageTime(timestamp: Timestamp, full: Boolean): String {

@@ -1,19 +1,24 @@
 package com.example.ana.presentation.ui.fragments.main.home
 
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ana.data.model.Child
 import com.example.ana.databinding.FragmentHomeBinding
+import com.example.ana.presentation.ui.adapters.AdviceAdapter
+import com.example.ana.presentation.ui.adapters.ChildAdapter
+import com.example.ana.presentation.ui.fragments.main.home.child.ChildAuthBottomSheet
+import com.example.ana.presentation.ui.fragments.main.home.child.UpdateData
+import com.example.ana.view_model.HomeViewModel
 import com.teenteen.teencash.presentation.base.BaseFragment
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData {
+
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var adapter: ChildAdapter
+    private lateinit var children: MutableList<Child>
     override fun attachBinding(
         list: MutableList<FragmentHomeBinding>,
         layoutInflater: LayoutInflater,
@@ -24,28 +29,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setupViews() {
+        progressDialog.show()
+        children = mutableListOf()
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.title.text = "Hello, ${prefs.getName()}!"
         setupRecyclerView()
-        if (prefs.getChildName().isNullOrEmpty() && prefs.getChildAge().isNullOrEmpty()) {
-            binding.btnAddChild.visibility = View.VISIBLE
-            binding.btnAddChild.setOnClickListener {
-                val directions =
-                    HomeFragmentDirections.actionHomeFragmentToChildAuthFragment()
-                findNavController().navigate(directions)
-            }
-        } else {
-            binding.btnAddChild.visibility = View.INVISIBLE
-            binding.ivAdd.visibility = View.INVISIBLE
-            binding.btnText.visibility = View.INVISIBLE
-            binding.childCard.visibility = View.VISIBLE
-            binding.childName.text = prefs.getChildName()
-            binding.childAge.text = prefs.getChildAge()
-        }
+        setupButtons()
+        viewModel.getChildren(currentUser!!.uid)
     }
 
-    fun setupRecyclerView() {
-        binding.listAdvices.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.listPopular.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    private fun setupRecyclerView() {
+        binding.listAdvices.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.listPopular.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         val adviceAdapter = AdviceAdapter(5)
         val popularAdapter = PopularAdapter(5)
@@ -53,5 +50,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.listPopular.adapter = popularAdapter
     }
 
-    override fun subscribeToLiveData() {}
+    private fun setupButtons() {
+        binding.diary
+        binding.book
+        binding.expert
+        binding.plan
+    }
+
+    override fun subscribeToLiveData() {
+        viewModel.children.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.layoutEmpty.visibility = View.VISIBLE
+                binding.layoutItems.visibility = View.GONE
+                progressDialog.dismiss()
+                binding.btnAddFirstChild.setOnClickListener {
+                    ChildAuthBottomSheet(this).show(childFragmentManager, "Authorization")
+                }
+            } else {
+                binding.layoutEmpty.visibility = View.GONE
+                binding.layoutItems.visibility = View.VISIBLE
+                progressDialog.dismiss()
+                children = it.toMutableList()
+                adapter = ChildAdapter(children)
+                binding.rvChildren.adapter = adapter
+                binding.rvChildren.layoutManager = LinearLayoutManager(requireContext())
+
+                binding.btnAddBaby.setOnClickListener {
+                    ChildAuthBottomSheet(this).show(childFragmentManager, "Authorization")
+                }
+
+                binding.addBabyTitle.setOnClickListener {
+                    ChildAuthBottomSheet(this).show(childFragmentManager, "Authorization")
+                }
+            }
+        }
+    }
+
+    override fun updateChildrenList() {
+        viewModel.getChildren(currentUser!!.uid)
+    }
 }

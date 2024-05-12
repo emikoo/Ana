@@ -10,6 +10,7 @@ import com.example.ana.data.local.PrefsSettings
 import com.example.ana.databinding.FragmentOnboardingBinding
 import com.example.ana.presentation.extensions.activityNavController
 import com.example.ana.presentation.extensions.navigateSafely
+import com.example.ana.presentation.ui.adapters.SliderAdapter
 import com.teenteen.teencash.presentation.base.BaseFragment
 
 class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
@@ -53,8 +54,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     private val sliderChangeListener = object : ViewPager.OnPageChangeListener {
         override fun onPageSelected(position: Int) {
             addBottomDots(position)
-            if (layouts.size.minus(1) == position) binding.btnNext.setText(R.string.start)
-            else binding.btnNext.setText(R.string.next)
+            if (layouts.size.minus(1) == position) binding.button1.setText(R.string.start)
+            else binding.button1.setText(R.string.next)
         }
 
         override fun onPageScrollStateChanged(state: Int) {}
@@ -83,7 +84,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     }
 
     private fun interactions() {
-        binding.btnNext.setOnClickListener {
+        binding.button1.setOnClickListener {
             val current = getCurrentScreen(+ 1)
             if (current < layouts.size) {
                 binding.slider.currentItem = current

@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ana.data.model.ChatMessage
-import com.example.ana.data.model.Message
 import com.example.ana.data.model.MessageType
 import com.example.ana.databinding.FragmentChatBinding
+import com.example.ana.presentation.ui.adapters.MessageAdapter
 import com.example.ana.view_model.MessagesViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.teenteen.teencash.presentation.base.BaseFragment
@@ -18,6 +18,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private lateinit var adapter: MessageAdapter
     private lateinit var chatMessages: MutableList<ChatMessage>
     private lateinit var viewModel: MessagesViewModel
+    private var pressed = false
 
     override fun attachBinding(
         list: MutableList<FragmentChatBinding>,
@@ -32,7 +33,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         progressDialog.show()
         chatMessages = mutableListOf()
         adapter = MessageAdapter(chatMessages)
-        viewModel = ViewModelProvider(this).get(MessagesViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MessagesViewModel::class.java]
         binding.rvChat.adapter = adapter
         binding.rvChat.layoutManager = LinearLayoutManager(requireContext())
         viewModel.getMessages(prefs.getCurrentUserId())
@@ -44,6 +45,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 viewModel.monitorLastMessage(prefs.getCurrentUserId(), messageText)
                 binding.etMessage.setText("")
             }
+            pressed = true
         }
     }
 
@@ -52,18 +54,21 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             setupMessageListener()
             progressDialog.dismiss()
         }
+
         viewModel.lastMessage.observe(viewLifecycleOwner) { message ->
             message?.let {
-                val bot = ChatMessage(
-                    parentMessageId = message.parentMessageId,
-                    senderId = message.senderId,
-                    response = message.response,
-                    prompt = "",
-                    timestampFull = message.timestampFull,
-                    timestampShort = message.timestampShort,
-                    type = MessageType.BOT
-                )
-                updateResponse(bot)
+                if (pressed) {
+                    val bot = ChatMessage(
+                        parentMessageId = message.parentMessageId,
+                        senderId = message.senderId,
+                        response = message.response,
+                        prompt = "",
+                        timestampFull = message.timestampFull,
+                        timestampShort = message.timestampShort,
+                        type = MessageType.BOT
+                    )
+                    updateResponse(bot)
+                }
             }
         }
     }
@@ -79,7 +84,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
                 for (dc in snapshots!!.documentChanges) {
                     if (dc.type == DocumentChange.Type.ADDED) {
-                        val message = dc.document.toObject(Message::class.java)
+                        val message = dc.document.toObject(ChatMessage::class.java)
                         val user = ChatMessage(
                             parentMessageId = message.parentMessageId,
                             senderId = message.senderId,
@@ -109,6 +114,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         chatMessages.add(message)
         adapter.notifyItemInserted(chatMessages.size - 1)
         binding.rvChat.scrollToPosition(chatMessages.size - 1)
+        progressDialog.dismiss()
     }
 
     private fun updateResponse(message: ChatMessage) {
@@ -119,4 +125,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         progressDialog.dismiss()
     }
 
+    override fun onPause() {
+        super.onPause()
+        pressed = false
+    }
 }

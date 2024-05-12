@@ -1,7 +1,7 @@
 package com.example.ana.presentation.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.ana.R
@@ -32,9 +32,11 @@ class MainActivity : AppCompatActivity() {
             PrefsSettings.FIRST_TIME -> {
                 navGraph.setStartDestination(R.id.onboardingFlowFragment)
             }
+
             PrefsSettings.NOT_AUTH -> {
                 navGraph.setStartDestination(R.id.authFlowFragment)
             }
+
             PrefsSettings.USER -> {
                 navGraph.setStartDestination(R.id.mainFlowFragment)
             }

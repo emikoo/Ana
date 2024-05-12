@@ -1,4 +1,4 @@
-package com.example.ana.presentation.ui.fragments.main.chat
+package com.example.ana.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.example.ana.data.model.ChatMessage
 import com.example.ana.data.model.MessageType
 
 enum class ViewType {
-    USER_MESSAGE, BOT_MESSAGE, TYPING_INDICATOR
+    USER_MESSAGE, BOT_MESSAGE
 }
 
 class MessageAdapter(private val messages: MutableList<ChatMessage>) :
@@ -20,18 +20,15 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
         return when (messages[position].type) {
             MessageType.USER -> ViewType.USER_MESSAGE.ordinal
             MessageType.BOT -> ViewType.BOT_MESSAGE.ordinal
-            MessageType.TYPING -> ViewType.TYPING_INDICATOR.ordinal
-            else -> {ViewType.USER_MESSAGE.ordinal}
+            else -> { ViewType.USER_MESSAGE.ordinal }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-//        return UserMessageViewHolder(inflater.inflate(R.layout.message_item_user, parent, false))
         return when(viewType) {
             ViewType.USER_MESSAGE.ordinal -> UserMessageViewHolder(inflater.inflate(R.layout.message_item_user, parent, false))
             ViewType.BOT_MESSAGE.ordinal -> BotMessageViewHolder(inflater.inflate(R.layout.message_item_bot, parent, false))
-            ViewType.TYPING_INDICATOR.ordinal -> TypingViewHolder(inflater.inflate(R.layout.message_item_bot, parent, false))
             else -> throw IllegalArgumentException("Unsupported view type")
         }
     }
@@ -40,7 +37,6 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
         when (holder) {
             is UserMessageViewHolder -> holder.bind(messages[position])
             is BotMessageViewHolder -> holder.bind(messages[position])
-            is TypingViewHolder -> holder.bind()
         }
     }
 
@@ -72,9 +68,5 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
             else messageTextView.text = message.response
             timeTextView.text = message.timestampShort
         }
-    }
-
-    class TypingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind() {}
     }
 }

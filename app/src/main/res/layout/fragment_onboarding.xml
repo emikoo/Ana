@@ -22,17 +22,17 @@
         android:layout_marginBottom="@dimen/dp_16"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintBottom_toTopOf="@id/button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="@dimen/dp_16"
         android:background="@drawable/bg_button_selected"
-        style="@style/buttonText"
+        style="@style/ButtonText"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/dots_layout"
