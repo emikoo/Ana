@@ -44,5 +44,60 @@
         <action
             android:id="@+id/action_selfCareFragment_self"
             app:destination="@id/selfCareFragment" />
+        <action
+            android:id="@+id/action_selfCareFragment_to_meditationFragment"
+            app:destination="@id/meditationFragment"
+            app:popUpTo="@id/selfCareFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_selfCareFragment_to_podcastFragment"
+            app:destination="@id/podcastFragment"
+            app:popUpTo="@id/selfCareFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/meditationFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.care.meditation.MeditationFragment"
+        android:label="fragment_meditation"
+        tools:layout="@layout/fragment_meditation" >
+        <action
+            android:id="@+id/action_meditationFragment_to_selfCareFragment"
+            app:destination="@id/selfCareFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/podcastFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.care.podcast.PodcastFragment"
+        android:label="fragment_podcast"
+        tools:layout="@layout/fragment_podcast" >
+        <action
+            android:id="@+id/action_podcastFragment_to_selfCareFragment"
+            app:destination="@id/selfCareFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_podcastFragment_to_itemPodcastFragment2"
+            app:destination="@id/itemPodcastFragment2"
+            app:popUpTo="@id/podcastFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false">
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/itemPodcastFragment2"
+        android:name="com.example.ana.presentation.ui.fragments.main.care.podcast.ItemPodcastFragment"
+        android:label="fragment_podcast_item"
+        tools:layout="@layout/fragment_podcast_item">
+        <argument
+            android:name="itemPodcast"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_itemPodcastFragment2_to_podcastFragment"
+            app:destination="@id/podcastFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false" />
     </fragment>
 </navigation>

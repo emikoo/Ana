@@ -182,7 +182,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             }
     }
 
-    fun addUserToFirestore() {
+    private fun addUserToFirestore() {
         auth.uid?.let { usersCollection.document(it).set(mapOf("phone" to phoneNumber, "name" to userName))  }
     }
 

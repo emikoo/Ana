@@ -31,4 +31,8 @@
     <string name="profile">Profile</string>
     <string name="add_child">Add child</string>
     <string name="skip">Skip</string>
+    <string name="meditation">Meditation</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="wish_card">Wish Card</string>
+    <string name="we_also_advise_you_to_watch">We also advise you to watch</string>
 </resources>

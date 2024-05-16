@@ -14,7 +14,11 @@ import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
 
-class CareAdapter : RecyclerView.Adapter<CareAdapter.CareViewHolder>() {
+interface CareSelector {
+    fun openMeditation()
+    fun openPodcasts()
+}
+class CareAdapter(private val selector: CareSelector) : RecyclerView.Adapter<CareAdapter.CareViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CareViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_care, parent, false)
@@ -23,6 +27,12 @@ class CareAdapter : RecyclerView.Adapter<CareAdapter.CareViewHolder>() {
 
     override fun onBindViewHolder(holder: CareViewHolder, position: Int) {
         holder.bind(careList[position])
+        holder.itemView.setOnClickListener {
+            when(position) {
+                0 -> selector.openMeditation()
+                1 -> selector.openPodcasts()
+            }
+        }
     }
 
     override fun getItemCount() = careList.size
