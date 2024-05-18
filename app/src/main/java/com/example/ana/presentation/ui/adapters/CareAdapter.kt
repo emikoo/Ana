@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter
 interface CareSelector {
     fun openMeditation()
     fun openPodcasts()
+
+    fun openWishCard()
 }
 class CareAdapter(private val selector: CareSelector) : RecyclerView.Adapter<CareAdapter.CareViewHolder>() {
 
@@ -31,6 +33,7 @@ class CareAdapter(private val selector: CareSelector) : RecyclerView.Adapter<Car
             when(position) {
                 0 -> selector.openMeditation()
                 1 -> selector.openPodcasts()
+                2 -> selector.openWishCard()
             }
         }
     }

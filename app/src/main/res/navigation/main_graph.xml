@@ -56,6 +56,12 @@
             app:popUpTo="@id/selfCareFragment"
             app:popUpToInclusive="true"
             app:popUpToSaveState="false" />
+        <action
+            android:id="@+id/action_selfCareFragment_to_wishCardFragment"
+            app:destination="@id/wishCardFragment"
+            app:popUpTo="@id/selfCareFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
     </fragment>
     <fragment
         android:id="@+id/meditationFragment"
@@ -67,6 +73,12 @@
             app:destination="@id/selfCareFragment"
             app:popUpToInclusive="true"
             app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_meditationFragment_to_itemMeditationFragment"
+            app:destination="@id/itemMeditationFragment"
+            app:popUpTo="@id/meditationFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false" />
     </fragment>
     <fragment
         android:id="@+id/podcastFragment"
@@ -90,14 +102,41 @@
         android:id="@+id/itemPodcastFragment2"
         android:name="com.example.ana.presentation.ui.fragments.main.care.podcast.ItemPodcastFragment"
         android:label="fragment_podcast_item"
-        tools:layout="@layout/fragment_podcast_item">
+        tools:layout="@layout/fragment_item_podcast">
         <argument
-            android:name="itemPodcast"
+            android:name="itemId"
             app:argType="integer"/>
         <action
             android:id="@+id/action_itemPodcastFragment2_to_podcastFragment"
             app:destination="@id/podcastFragment"
             app:popUpToInclusive="true"
             app:popUpToSaveState="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemMeditationFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.care.meditation.ItemMeditationFragment"
+        android:label="fragment_item_meditation"
+        tools:layout="@layout/fragment_item_meditation" >
+
+        <argument
+            android:name="itemId"
+            app:argType="integer"/>
+
+        <action
+            android:id="@+id/action_itemMeditationFragment_to_meditationFragment"
+            app:destination="@id/meditationFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/wishCardFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.care.wishcard.WishCardFragment"
+        android:label="fragment_wish_card"
+        tools:layout="@layout/fragment_wish_card" >
+        <action
+            android:id="@+id/action_wishCardFragment_to_selfCareFragment"
+            app:destination="@id/selfCareFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
     </fragment>
 </navigation>

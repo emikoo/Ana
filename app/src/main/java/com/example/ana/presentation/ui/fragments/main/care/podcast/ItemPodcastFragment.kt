@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.ana.R
 import com.example.ana.data.model.Podcast
-import com.example.ana.databinding.FragmentPodcastItemBinding
+import com.example.ana.databinding.FragmentItemPodcastBinding
 import com.example.ana.presentation.ui.adapters.PodcastAdapter
 import com.example.ana.presentation.ui.adapters.PodcastInterface
 import com.example.ana.view_model.CareViewModel
 import com.teenteen.teencash.presentation.base.BaseFragment
 
-class ItemPodcastFragment : BaseFragment<FragmentPodcastItemBinding>(), PodcastInterface {
+class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastInterface {
 
     private lateinit var adapter: PodcastAdapter
     private lateinit var podcastList: MutableList<Podcast>
@@ -30,8 +30,8 @@ class ItemPodcastFragment : BaseFragment<FragmentPodcastItemBinding>(), PodcastI
         podcastList = mutableListOf()
         adapter = PodcastAdapter(podcastList, this)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-        viewModel.getItemPodcast(arguments.itemPodcast)
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, true)
+        viewModel.getItemPodcast(arguments.itemId)
         binding.btnBack.setOnClickListener {
             findNavController().navigate(ItemPodcastFragmentDirections.actionItemPodcastFragment2ToPodcastFragment())
         }
@@ -49,7 +49,7 @@ class ItemPodcastFragment : BaseFragment<FragmentPodcastItemBinding>(), PodcastI
             binding.author.text = podcast.author
             viewModel.updateViews(podcast.id, podcast.views+1)
             binding.views.text = "${podcast.views} views"
-            viewModel.getPodcastExceptItem(arguments.itemPodcast)
+            viewModel.getPodcastExceptItem(arguments.itemId)
             progressDialog.dismiss()
             showVideo(podcast.url)
         }
@@ -62,12 +62,12 @@ class ItemPodcastFragment : BaseFragment<FragmentPodcastItemBinding>(), PodcastI
     }
 
     override fun attachBinding(
-        list: MutableList<FragmentPodcastItemBinding>,
+        list: MutableList<FragmentItemPodcastBinding>,
         layoutInflater: LayoutInflater,
         container: ViewGroup?,
         attachToRoot: Boolean
     ) {
-        list.add(FragmentPodcastItemBinding.inflate(layoutInflater, container, attachToRoot))
+        list.add(FragmentItemPodcastBinding.inflate(layoutInflater, container, attachToRoot))
     }
 
     override fun onPodcastSelected(podcast: Podcast) {

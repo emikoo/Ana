@@ -10,19 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.ana.R
 import com.example.ana.data.local.PrefsSettings
+import com.example.ana.data.model.cardImagesList
+import com.example.ana.data.model.cardList
 import com.example.ana.databinding.FragmentAuthBinding
 import com.example.ana.presentation.extensions.activityNavController
 import com.example.ana.presentation.extensions.navigateSafely
-import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.teenteen.teencash.presentation.base.BaseFragment
 import java.util.concurrent.TimeUnit
 
@@ -60,8 +57,20 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     }
                     binding.input.addTextChangedListener(object : TextWatcher {
                         override fun afterTextChanged(s: Editable?) {}
-                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        override fun beforeTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            count: Int,
+                            after: Int
+                        ) {
+                        }
+
+                        override fun onTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            before: Int,
+                            count: Int
+                        ) {
                             binding.error.setTextColor(resources.getColor(R.color.grey))
                             binding.error.text = "Пожалуйста пишите в формате +7##########"
                         }
@@ -78,7 +87,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 }
 
                 Screen.NAME -> {
-                    userName =binding.input.text.toString()
+                    userName = binding.input.text.toString()
                     prefsSettings.saveName(userName)
                     prefs.setFirstTimeLaunch(PrefsSettings.USER)
                     prefsSettings.saveCurrentUserId(auth.uid)
@@ -89,9 +98,16 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         }
         binding.btnBack.setOnClickListener {
             when (state) {
-                Screen.CODE -> { setPhoneView() }
+                Screen.CODE -> {
+                    setPhoneView()
+                }
+
                 Screen.PHONE_NUMBER -> TODO()
-                Screen.NAME -> { setCodeView() } } }
+                Screen.NAME -> {
+                    setCodeView()
+                }
+            }
+        }
     }
 
     private fun verifyVerificationCode(code: String) {
@@ -158,7 +174,10 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             Log.w("AuthFragment", "onVerificationFailed", e)
         }
 
-        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken
+        ) {
             storedVerificationId = verificationId
             resendToken = token
             setCodeView()
@@ -183,7 +202,15 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     private fun addUserToFirestore() {
-        auth.uid?.let { usersCollection.document(it).set(mapOf("phone" to phoneNumber, "name" to userName))  }
+        auth.uid?.let {
+            usersCollection.document(it).set(mapOf("phone" to phoneNumber, "name" to userName))
+            for (card in cardList) {
+                for (image in cardImagesList) {
+                    usersCollection.document(it).collection("wish_card").document(card.name.toString())
+                        .collection("images").document(image.name.toString()).set(image)
+                }
+            }
+        }
     }
 
     companion object {

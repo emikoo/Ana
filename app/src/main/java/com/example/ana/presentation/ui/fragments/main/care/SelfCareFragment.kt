@@ -1,18 +1,13 @@
 package com.example.ana.presentation.ui.fragments.main.care
 
-import android.R
-import android.R.attr.fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ana.databinding.FragmentSelfCareBinding
 import com.example.ana.presentation.ui.adapters.CareAdapter
 import com.example.ana.presentation.ui.adapters.CareSelector
 import com.teenteen.teencash.presentation.base.BaseFragment
-
 
 class SelfCareFragment : BaseFragment<FragmentSelfCareBinding>(), CareSelector {
 
@@ -40,13 +35,15 @@ class SelfCareFragment : BaseFragment<FragmentSelfCareBinding>(), CareSelector {
     }
 
     override fun openMeditation() {
-        val directions = SelfCareFragmentDirections.actionSelfCareFragmentToMeditationFragment()
-        findNavController().navigate(directions)
+        findNavController().navigate(SelfCareFragmentDirections.actionSelfCareFragmentToMeditationFragment())
     }
 
     override fun openPodcasts() {
-        val directions = SelfCareFragmentDirections.actionSelfCareFragmentToPodcastFragment()
-        findNavController().navigate(directions)
+        findNavController().navigate(SelfCareFragmentDirections.actionSelfCareFragmentToPodcastFragment())
+    }
+
+    override fun openWishCard() {
+        findNavController().navigate(SelfCareFragmentDirections.actionSelfCareFragmentToWishCardFragment())
     }
 
 }

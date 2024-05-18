@@ -21,7 +21,7 @@ class MeditationAdapter(private val meditation: MutableList<Meditation>,
     RecyclerView.Adapter<MeditationAdapter.MeditationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeditationViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_meditation, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_session, parent, false)
         return MeditationViewHolder(view)
     }
 

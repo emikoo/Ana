@@ -6,6 +6,8 @@ import com.example.ana.data.model.Meditation
 import com.example.ana.data.model.Meditation.Companion.toMeditation
 import com.example.ana.data.model.Podcast
 import com.example.ana.data.model.Podcast.Companion.toPodcast
+import com.example.ana.data.model.SoundSession
+import com.example.ana.data.model.SoundSession.Companion.toSoundSession
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -42,6 +44,19 @@ object FirebaseCareService {
         }
     }
 
+    suspend fun getSoundSession(): List<SoundSession> {
+        return try {
+            val array = db.collection("meditation").document("first").collection("sounds")
+            array.get().await()
+                .documents.mapNotNull { it.toSoundSession() }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting soundSession", e)
+            FirebaseCrashlytics.getInstance().log("Error getting soundSession")
+            FirebaseCrashlytics.getInstance().recordException(e)
+            emptyList()
+        }
+    }
+
     suspend fun getPodcastExceptItem(itemId: Int): List<Podcast> {
         return try {
             val array = db.collection("podcasts").orderBy("id").whereNotEqualTo("id", itemId)
@@ -67,6 +82,18 @@ object FirebaseCareService {
         }
     }
 
+    suspend fun getItemMeditation(itemId: Int): Meditation? {
+        return try {
+            val podcast = db.collection("meditation").get().await().documents[itemId].toMeditation()
+            podcast
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting meditation", e)
+            FirebaseCrashlytics.getInstance().log("Error getting meditation")
+            FirebaseCrashlytics.getInstance().recordException(e)
+            null
+        }
+    }
+
     fun updateViews(podcastId: Int, views: Int) {
         try {
             db.collection("podcasts").document("nuradam$podcastId").update("views", views)
@@ -74,6 +101,16 @@ object FirebaseCareService {
             Log.e(TAG , "Error updating views" , e)
             FirebaseCrashlytics.getInstance().log("Error updating views")
             FirebaseCrashlytics.getInstance().setCustomKey("user id" , podcastId)
+            FirebaseCrashlytics.getInstance().recordException(e)
+        }
+    }
+
+    fun updateSessionCount(count: Int) {
+        try {
+            db.collection("meditation").document("first").update("count", count)
+        } catch (e: Exception) {
+            Log.e(TAG , "Error updating count" , e)
+            FirebaseCrashlytics.getInstance().log("Error updating count")
             FirebaseCrashlytics.getInstance().recordException(e)
         }
     }

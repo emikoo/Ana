@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.fragments.main.care.WishCardFragment">
-
+    tools:context=".presentation.ui.fragments.main.care.wishcard.WishCardFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@color/white"
@@ -55,11 +54,38 @@
             android:text="@string/wish_card"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/title_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        tools:text="Section Me"
+        android:visibility="gone"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/sp_15"
+        android:fontFamily="@font/sf_pro_display_medium"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/tab_background"
+        app:tabBackground="@drawable/tab_unselected"
+        app:tabTextColor="@color/dark"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        app:tabSelectedTextColor="@color/white"
+        style="@style/CustomTabLayout"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_8"
+        tools:itemCount="9"
         android:orientation="vertical"/>
 </LinearLayout>

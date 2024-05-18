@@ -3,6 +3,7 @@ package com.example.ana.presentation.ui.fragments.main.chat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ana.data.model.ChatMessage
@@ -32,6 +33,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun setupViews() {
         progressDialog.show()
         chatMessages = mutableListOf()
+        chatMessages.clear()
         adapter = MessageAdapter(chatMessages)
         viewModel = ViewModelProvider(this)[MessagesViewModel::class.java]
         binding.rvChat.adapter = adapter
@@ -128,5 +130,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun onPause() {
         super.onPause()
         pressed = false
+        Toast.makeText(requireContext(), "Pause", Toast.LENGTH_SHORT).show()
     }
 }
