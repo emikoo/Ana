@@ -9,8 +9,7 @@ class PrefsSettings(context: Context) {
         context.getSharedPreferences(PREFS_NAME , Context.MODE_PRIVATE)
     private var prefsEditor: SharedPreferences.Editor = prefs.edit()
     private val UID = "UID"
-    private val PHONE_NUMBER = "PHONE_NUMBER"
-    private val NAME = "NAME"
+    private val LANGUAGE = "LANGUAGE"
 
     fun setFirstTimeLaunch(isFirstTime: Int) {
         prefsEditor.putInt(IS_FIRST_TIME_LAUNCH , isFirstTime).commit()
@@ -18,28 +17,21 @@ class PrefsSettings(context: Context) {
 
     fun isFirstTimeLaunch(): Int = prefs.getInt(IS_FIRST_TIME_LAUNCH , FIRST_TIME)
 
+    fun saveSettingsLanguage(language: String?) {
+        prefsEditor.putString(LANGUAGE , language).apply()
+    }
+
+    fun getSettingsLanguage(): String {
+        return prefs.getString(LANGUAGE , Locale.getDefault().language)
+            ?: Locale.getDefault().language
+    }
+
     fun saveCurrentUserId(uid: String?) {
         prefsEditor.putString(UID , uid).apply()
     }
 
     fun getCurrentUserId(): String {
         return prefs.getString(UID , "") ?: ""
-    }
-
-    fun savePhoneNumber(number: String?) {
-        prefsEditor.putString(PHONE_NUMBER, number).apply()
-    }
-
-    fun getPhoneNumber(): String {
-        return prefs.getString(PHONE_NUMBER, "") ?: ""
-    }
-
-    fun saveName(name: String?) {
-        prefsEditor.putString(NAME, name).apply()
-    }
-
-    fun getName() : String {
-        return prefs.getString(NAME, "") ?: ""
     }
     companion object {
         private const val PREFS_NAME = "Ana"

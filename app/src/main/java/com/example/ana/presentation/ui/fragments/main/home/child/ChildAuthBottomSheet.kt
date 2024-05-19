@@ -63,7 +63,7 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
                 }
 
                 Screen.ENDING -> {
-                    setupDiaryScreen()
+                    this.dismiss()
                 }
 
                 Screen.DIARY -> {
@@ -113,11 +113,11 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
         state = Screen.ENDING
         binding.title.text = "Thank you for provided information"
         binding.textField.visibility = View.GONE
+        binding.button1.visibility = View.GONE
         binding.button2.visibility = View.GONE
         binding.skip.visibility = View.INVISIBLE
         binding.image.visibility = View.VISIBLE
         binding.image.setBackgroundResource(R.drawable.ic_tick_ending)
-        binding.button1.text = "Next"
         progressDialog.dismiss()
     }
 
@@ -238,7 +238,7 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
     }
 
     private fun addChild(child: Child) {
-        viewModel.addChild(currentUser!!.uid, child)
+        viewModel.addChild(prefs.getCurrentUserId(), child)
         updater.updateChildrenList()
     }
 

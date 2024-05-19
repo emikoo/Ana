@@ -13,5 +13,6 @@
         android:textSize="@dimen/sp_15"
         android:fontFamily="@font/sf_pro_display_medium"
         android:gravity="center"
-        android:layout_margin="4dp"/>
+        android:background="@drawable/tab_unselected"
+        android:padding="4dp"/>
 </LinearLayout>

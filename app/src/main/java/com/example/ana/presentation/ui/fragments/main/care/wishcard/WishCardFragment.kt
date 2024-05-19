@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,7 +35,6 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
     var imageId = ""
 
     override fun setupViews() {
-        adapter = WishCardAdapter(cardList, this)
         viewModel = ViewModelProvider(this)[WishCardViewModel::class.java]
         setupRecyclerView()
         binding.btnBack.setOnClickListener {
@@ -47,7 +47,7 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
                 }
 
                 GALLERY_SECTION -> {
-                    viewModel.getSectionItems(currentUser!!.uid, sectionName)
+                    viewModel.getSectionItems(prefs.getCurrentUserId(), sectionName)
                     binding.tab.visibility = View.GONE
                     binding.titleSection.visibility = View.VISIBLE
                     itemSection = ITEM_SECTION
@@ -57,6 +57,7 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
     }
 
     private fun setupRecyclerView() {
+        adapter = WishCardAdapter(cardList, this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager =
             GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
@@ -84,7 +85,7 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
                 binding.titleSection.visibility = View.VISIBLE
                 sectionName = sector.name.toString()
                 binding.titleSection.text = "Section $sectionName"
-                viewModel.getSectionItems(currentUser!!.uid, sectionName)
+                viewModel.getSectionItems(prefs.getCurrentUserId(), sectionName)
                 itemSection = ITEM_SECTION
             }
 
@@ -101,12 +102,12 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
                 binding.tab.visibility = View.GONE
                 binding.titleSection.visibility = View.VISIBLE
                 viewModel.uploadPicture(
-                    currentUser!!.uid,
+                    prefs.getCurrentUserId(),
                     sectionName,
                     imageId,
                     sector.image.toString()
                 )
-                viewModel.getSectionItems(currentUser!!.uid, sectionName)
+                viewModel.getSectionItems(prefs.getCurrentUserId(), sectionName)
                 itemSection = ITEM_SECTION
             }
         }
@@ -162,10 +163,10 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == RESULT_GALLERY) {
             val imageUri = data?.data
-            viewModel.uploadPicture(currentUser!!.uid, sectionName, imageId, imageUri.toString())
-            viewModel.getSectionItems(currentUser!!.uid, sectionName)
+            viewModel.uploadPicture(prefs.getCurrentUserId(), sectionName, imageId, imageUri.toString())
+            viewModel.getSectionItems(prefs.getCurrentUserId(), sectionName)
             setupItemSection()
-        }
+        } else binding.tab.getTabAt(0)?.select()
     }
 
     private fun setupItemSection() {

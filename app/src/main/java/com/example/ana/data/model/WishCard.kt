@@ -13,8 +13,8 @@ data class WishCard(
     companion object {
         fun DocumentSnapshot.toWishCard(): WishCard? {
             return try {
-                val name = getString("name") !!
-                val image = getString("image") !!
+                val name = getString("name").toString()
+                val image = getString("image").toString()
                 val itemSection = get("itemSection").toString().toInt()
                 WishCard(name, image, itemSection)
             } catch (e: Exception) {

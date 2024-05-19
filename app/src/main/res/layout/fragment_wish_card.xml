@@ -63,16 +63,19 @@
         android:visibility="gone"
         android:textColor="@color/dark"
         android:textSize="@dimen/sp_15"
+        android:layout_marginTop="@dimen/dp_8"
         android:fontFamily="@font/sf_pro_display_medium"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab"
+        app:tabRippleColor="@null"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="40dp"
         android:background="@drawable/tab_background"
         app:tabBackground="@drawable/tab_unselected"
         app:tabTextColor="@color/dark"
         android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_gravity="center_vertical"
         app:tabSelectedTextColor="@color/white"
         style="@style/CustomTabLayout"/>

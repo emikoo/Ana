@@ -130,6 +130,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun onPause() {
         super.onPause()
         pressed = false
-        Toast.makeText(requireContext(), "Pause", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireContext(), "Pause", Toast.LENGTH_SHORT).show()
     }
 }

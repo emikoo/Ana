@@ -55,6 +55,7 @@
         <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
         <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabIndicatorHeight">0dp</item>
+        <item name="background">@drawable/tab_background</item>
     </style>
 
     <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">

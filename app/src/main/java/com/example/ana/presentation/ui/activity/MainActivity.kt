@@ -1,24 +1,29 @@
 package com.example.ana.presentation.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.preference.PreferenceManager
 import com.example.ana.R
 import com.example.ana.data.local.PrefsSettings
 import com.example.ana.databinding.ActivityMainBinding
+import com.example.ana.presentation.extensions.updateLanguage
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var prefs: PrefsSettings
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Ana)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = PrefsSettings(this)
+        PreferenceManager(this).updateLanguage(prefs.getSettingsLanguage() , this, prefs)
         setupNavigation()
     }
 

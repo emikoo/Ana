@@ -28,7 +28,7 @@ class ItemMeditationFragment : BaseFragment<FragmentItemMeditationBinding>(), So
     private lateinit var viewModel: CareViewModel
     private lateinit var adapter: SoundSessionAdapter
     private lateinit var soundSession: MutableList<SoundSession>
-    private lateinit var mediaPlayer: MediaPlayer
+//    private lateinit var mediaPlayer: MediaPlayer
 
     private val arguments: ItemMeditationFragmentArgs by navArgs()
     private var flag: Boolean = false
@@ -75,7 +75,6 @@ class ItemMeditationFragment : BaseFragment<FragmentItemMeditationBinding>(), So
             binding.totalSessions.text = "${it.sessions} sessions"
             binding.sessions.text = "${it.count}/${it.sessions}"
             binding.name.text = it.name
-//            viewModel.updateSessionCount(it.count +1)
         }
         viewModel.soundSession.observe(viewLifecycleOwner) {
             soundSession.clear()
@@ -106,10 +105,10 @@ class ItemMeditationFragment : BaseFragment<FragmentItemMeditationBinding>(), So
 //            start()
 //        }
     }
-
-    override fun onStop() {
-        super.onStop()
-        mediaPlayer.stop()
-        mediaPlayer.release()
-    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        mediaPlayer.stop()
+//        mediaPlayer.release()
+//    }
 }

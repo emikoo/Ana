@@ -40,4 +40,6 @@
     <string name="read_less">Read less</string>
     <string name="description_short">Immerse yourself in a world of deep inner peace with this meditation. Tune into the moment of presence, free your mind from worry and tension. Allow yourself to immerse yourself in your thoughts, sensations and emotions without judging or becoming attached to them.</string>
     <string name="description_full">Immerse yourself in a world of deep inner peace with this meditation. Tune into the moment of presence, free your mind from worry and tension. Allow yourself to immerse yourself in your thoughts, sensations and emotions without judging or becoming attached to them. Breathe deeply, allowing each inhale to fill you with peace and each exhale to release tension. Allow yourself to be simply here and now, in this moment of complete peace and harmony</string>
+    <string name="log_out">Log Out</string>
+    <string name="please_write_the_name_or_nickname">Please, write the name or nickname :)</string>
 </resources>

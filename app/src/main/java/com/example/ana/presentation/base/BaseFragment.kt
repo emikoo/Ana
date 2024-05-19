@@ -24,7 +24,6 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
     lateinit var prefs: PrefsSettings
     lateinit var auth: FirebaseAuth
     lateinit var db: FirebaseFirestore
-    var currentUser: FirebaseUser? = null
     lateinit var usersCollection: CollectionReference
     lateinit var progressDialog: Dialog
 
@@ -61,7 +60,6 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
         db = FirebaseFirestore.getInstance()
         prefs = PrefsSettings(requireActivity())
         auth = FirebaseAuth.getInstance()
-        currentUser = auth.currentUser
         progressDialog = ProgressDialog.progressDialog(requireActivity())
         val draw: Drawable? = requireActivity().getDrawable(R.drawable.custom_progressbar)
         usersCollection = db.collection("users")

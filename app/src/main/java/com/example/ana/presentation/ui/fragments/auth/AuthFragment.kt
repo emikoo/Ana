@@ -88,9 +88,8 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
                 Screen.NAME -> {
                     userName = binding.input.text.toString()
-                    prefsSettings.saveName(userName)
                     prefs.setFirstTimeLaunch(PrefsSettings.USER)
-                    prefsSettings.saveCurrentUserId(auth.uid)
+                    prefsSettings.saveCurrentUserId("$phoneNumber")
                     addUserToFirestore()
                     activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
                 }
@@ -119,6 +118,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         state = Screen.CODE
         binding.textField.visibility = View.GONE
         binding.smsCodeView.visibility = View.VISIBLE
+        binding.btnBack.visibility = View.VISIBLE
         binding.title.text = getString(R.string.type_sms_code)
         binding.subtitle.text =
             "A confirmation code was sent to the number " + binding.input.text.toString()
@@ -128,6 +128,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     private fun setPhoneView() {
         state = Screen.PHONE_NUMBER
+        binding.btnBack.visibility = View.INVISIBLE
         binding.smsCodeView.visibility = View.GONE
         binding.textField.visibility = View.VISIBLE
         binding.title.text = getString(R.string.authorization)
@@ -152,8 +153,6 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.error.setTextColor(resources.getColor(R.color.grey))
         binding.resend.visibility = View.GONE
     }
-
-    override fun subscribeToLiveData() {}
 
     private fun startPhoneNumberVerification(phoneNumber: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
@@ -188,30 +187,44 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Log.d(Companion.TAG, "signInWithCredential:success")
-                    val user = task.result?.user
-                    prefsSettings.savePhoneNumber(phoneNumber)
-                    setNameView()
+                    checkDocumentExists()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
+                        binding.subtitle.text = "Wrong code. Please try again"
                     }
                 }
             }
     }
 
-    private fun addUserToFirestore() {
-        auth.uid?.let {
-            usersCollection.document(it).set(mapOf("phone" to phoneNumber, "name" to userName))
-            for (card in cardList) {
-                for (image in cardImagesList) {
-                    usersCollection.document(it).collection("wish_card").document(card.name.toString())
-                        .collection("images").document(image.name.toString()).set(image)
+    private fun checkDocumentExists() {
+        val docRef = db.collection("users").document(phoneNumber)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    prefs.setFirstTimeLaunch(PrefsSettings.USER)
+                    prefsSettings.saveCurrentUserId(phoneNumber)
+                    activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
+                } else {
+                    setNameView()
                 }
+            }
+            .addOnFailureListener { exception ->
+                exception.printStackTrace()
+            }
+    }
+
+    private fun addUserToFirestore() {
+        usersCollection.document(phoneNumber).set(mapOf("phone" to phoneNumber, "name" to userName, "photo" to ""))
+        for (card in cardList) {
+            for (image in cardImagesList) {
+                usersCollection.document(phoneNumber).collection("wish_card").document(card.name.toString())
+                    .collection("images").document(image.name.toString()).set(image)
             }
         }
     }
+
+    override fun subscribeToLiveData() {}
 
     companion object {
         private const val TAG = "AuthFragment"

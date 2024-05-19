@@ -30,8 +30,9 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
         podcastList = mutableListOf()
         adapter = PodcastAdapter(podcastList, this)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, true)
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
         viewModel.getItemPodcast(arguments.itemId)
+        viewModel.getPodcastExceptItem(arguments.itemId+1)
         binding.btnBack.setOnClickListener {
             findNavController().navigate(ItemPodcastFragmentDirections.actionItemPodcastFragment2ToPodcastFragment())
         }
@@ -49,7 +50,6 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
             binding.author.text = podcast.author
             viewModel.updateViews(podcast.id, podcast.views+1)
             binding.views.text = "${podcast.views} views"
-            viewModel.getPodcastExceptItem(arguments.itemId)
             progressDialog.dismiss()
             showVideo(podcast.url)
         }
@@ -73,6 +73,7 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
     override fun onPodcastSelected(podcast: Podcast) {
         progressDialog.show()
         viewModel.getItemPodcast(podcast.id-1)
+        viewModel.getPodcastExceptItem(podcast.id)
     }
 
     private fun showVideo(podcastUrl: String?) {
