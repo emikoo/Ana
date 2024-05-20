@@ -30,7 +30,7 @@ class PodcastAdapter(private val podcast: MutableList<Podcast>, private val sele
     override fun getItemCount() = podcast.count()
 
     class PodcastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val name: TextView = itemView.findViewById(R.id.name)
+        private val name: TextView = itemView.findViewById(R.id.title)
         private val author: TextView = itemView.findViewById(R.id.author)
         private val preview: ImageView = itemView.findViewById(R.id.preview)
 

@@ -55,7 +55,7 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
 
                 Screen.NAME -> {
                     if (binding.input.text.toString().isNotBlank()) setupImageScreen()
-                    else Toast.makeText(requireContext(), "Please write the name or nickname :)", Toast.LENGTH_LONG).show()
+                    else Toast.makeText(requireContext(), getString(R.string.please_write_the_name_or_nickname), Toast.LENGTH_LONG).show()
                 }
 
                 Screen.IMAGE -> {
@@ -85,8 +85,8 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
 
     private fun setupAgeScreen() {
         state = Screen.AGE
-        binding.title.text = "When was the baby born?"
-        binding.button1.text = "Next"
+        binding.title.text = getString(R.string.when_was_the_baby_born)
+        binding.button1.text = getString(R.string.next)
     }
 
     private fun setupNameScreen() {
@@ -94,27 +94,27 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
         binding.textField.visibility = View.VISIBLE
         binding.datePicker.visibility = View.GONE
         binding.skip.visibility = View.VISIBLE
-        binding.title.text = "What is your child’s name?"
+        binding.title.text = getString(R.string.what_is_your_child_s_name)
     }
 
     private fun setupImageScreen() {
         state = Screen.IMAGE
         binding.textField.visibility = View.GONE
         binding.skip.visibility = View.VISIBLE
-        binding.button2.visibility = View.VISIBLE
+//        binding.button2.visibility = View.VISIBLE
         binding.image.visibility = View.VISIBLE
-        binding.title.text = "Add profile photo"
-        binding.button1.text = "Upload from device"
-        binding.button2.text = "Take a photo"
+        binding.title.text = getString(R.string.add_profile_photo)
+        binding.button1.text = getString(R.string.upload_from_device)
+//        binding.button2.text = "Take a photo"
         binding.image.setBackgroundResource(R.drawable.ic_baby_pic)
     }
 
     private fun setupEndingScreen() {
         state = Screen.ENDING
-        binding.title.text = "Thank you for provided information"
+        binding.title.text = getString(R.string.thank_you_for_provided_information)
         binding.textField.visibility = View.GONE
         binding.button1.visibility = View.GONE
-        binding.button2.visibility = View.GONE
+//        binding.button2.visibility = View.GONE
         binding.skip.visibility = View.INVISIBLE
         binding.image.visibility = View.VISIBLE
         binding.image.setBackgroundResource(R.drawable.ic_tick_ending)
@@ -174,7 +174,7 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
         } else {
             Toast.makeText(
                 requireContext(),
-                "Camera and Storage permissions are needed to take pictures",
+                getString(R.string.camera_and_storage_permissions_are_needed_to_take_pictures),
                 Toast.LENGTH_SHORT
             ).show()
         }

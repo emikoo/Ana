@@ -84,7 +84,7 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
                 binding.tab.visibility = View.GONE
                 binding.titleSection.visibility = View.VISIBLE
                 sectionName = sector.name.toString()
-                binding.titleSection.text = "Section $sectionName"
+                binding.titleSection.text = getString(R.string.section) + " $sectionName"
                 viewModel.getSectionItems(prefs.getCurrentUserId(), sectionName)
                 itemSection = ITEM_SECTION
             }
@@ -118,8 +118,8 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
         tabLayout.setSelectedTabIndicatorHeight(0)
         tabLayout.setBackgroundColor(Color.parseColor("#F0EDFF"))
         tabLayout.removeAllTabs()
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("Album")))
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("Download")))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.album))))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.download))))
         tabLayout.getTabAt(0)?.select()
         setSelectedTab(tabLayout.getTabAt(0))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

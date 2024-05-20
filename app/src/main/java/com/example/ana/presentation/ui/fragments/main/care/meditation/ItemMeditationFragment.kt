@@ -72,7 +72,7 @@ class ItemMeditationFragment : BaseFragment<FragmentItemMeditationBinding>(), So
                 .load(it.preview)
                 .placeholder(R.drawable.ic_logo)
                 .into(binding.preview)
-            binding.totalSessions.text = "${it.sessions} sessions"
+            binding.totalSessions.text = "${it.sessions}" + getString(R.string.sessions)
             binding.sessions.text = "${it.count}/${it.sessions}"
             binding.name.text = it.name
         }

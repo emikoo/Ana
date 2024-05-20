@@ -23,7 +23,7 @@
             android:background="@drawable/ic_add_circle"/>
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_pro_display_medium"

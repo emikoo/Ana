@@ -31,7 +31,7 @@ class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val 
     override fun getItemCount() = soundList.size
 
     class SoundViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val name: TextView = itemView.findViewById(R.id.name)
+        private val name: TextView = itemView.findViewById(R.id.title)
         private val preview: ImageView = itemView.findViewById(R.id.preview)
         private val ibPlayer: ImageButton = itemView.findViewById(R.id.ib_player)
         private val duration: TextView = itemView.findViewById(R.id.duration)
@@ -44,8 +44,9 @@ class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val 
                 .placeholder(R.drawable.ic_logo)
                 .into(preview)
             val time = soundSession.duration.splitToSequence(".")
-            if (time.count() == 1) duration.text ="${time.first()} min"
-            else duration.text = "${time.first()} min ${time.last()} sec"
+            if (time.count() == 1) duration.text = time.first() + " " + itemView.context.getString(R.string.min)
+            else duration.text = time.first() + " " + itemView.context.getString(R.string.min) + " "+ time.last() + " " + itemView.context.getString(
+                            R.string.sec)
             ibPlayer.setOnClickListener {
                 if (!flag) {
                     flag = true

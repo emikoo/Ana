@@ -2,6 +2,8 @@ package com.example.ana.service
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.example.ana.data.model.Advice
+import com.example.ana.data.model.Advice.Companion.toAdvice
 import com.example.ana.data.model.Child
 import com.example.ana.data.model.Child.Companion.toChild
 import com.example.ana.data.model.User
@@ -27,6 +29,19 @@ object FirebaseHomeService {
             Log.e(TAG, "Error getting children" , e)
             FirebaseCrashlytics.getInstance().log("Error getting children")
             FirebaseCrashlytics.getInstance().setCustomKey("uid" , userId)
+            FirebaseCrashlytics.getInstance().recordException(e)
+            emptyList()
+        }
+    }
+
+    suspend fun getAdvices(): List<Advice> {
+        return try {
+            val array = db.collection("advices")
+            array.get().await()
+                .documents.mapNotNull { it.toAdvice() }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting advices" , e)
+            FirebaseCrashlytics.getInstance().log("Error getting advices")
             FirebaseCrashlytics.getInstance().recordException(e)
             emptyList()
         }

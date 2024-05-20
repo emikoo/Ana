@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.ui.fragments.main.home.child.ChildDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/dp_16"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:background="@drawable/ic_back"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="@string/hello_blank_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginEnd="@dimen/dp_24">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/ic_baby"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:textSize="17sp"
+            android:textColor="@color/dark"
+            tools:text="Arman"
+            android:fontFamily="@font/sf_pro_text_medium"/>
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_16"
+            tools:text="2 days"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_24">
+
+        <View
+            android:id="@+id/sleep"
+            android:layout_width="164dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/bg_wish_unselected"
+            android:backgroundTint="#ffffff"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/physical_activity"/>
+        
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="@id/sleep"
+            app:layout_constraintBottom_toBottomOf="@id/sleep"
+            app:layout_constraintStart_toStartOf="@id/sleep"
+            app:layout_constraintEnd_toEndOf="@id/sleep"
+            android:background="@drawable/ic_baby"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/sleep"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/dark"
+            android:fontFamily="@font/sf_pro_text_medium"
+            app:layout_constraintTop_toBottomOf="@id/icon1"
+            app:layout_constraintStart_toStartOf="@id/sleep"
+            app:layout_constraintEnd_toEndOf="@id/sleep"/>
+
+        <View
+            android:id="@+id/food"
+            android:layout_width="164dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/bg_wish_unselected"
+            android:backgroundTint="#ffffff"
+            app:layout_constraintEnd_toStartOf="@id/mental_activity"
+            app:layout_constraintTop_toBottomOf="@id/sleep"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="@id/food"
+            app:layout_constraintBottom_toBottomOf="@id/food"
+            app:layout_constraintStart_toStartOf="@id/food"
+            app:layout_constraintEnd_toEndOf="@id/food"
+            android:background="@drawable/ic_baby"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/food"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/dark"
+            android:fontFamily="@font/sf_pro_text_medium"
+            app:layout_constraintTop_toBottomOf="@id/icon2"
+            app:layout_constraintStart_toStartOf="@id/food"
+            app:layout_constraintEnd_toEndOf="@id/food"/>
+
+        <View
+            android:id="@+id/physical_activity"
+            android:layout_width="164dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_wish_unselected"
+            android:backgroundTint="#ffffff"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sleep"/>
+
+        <ImageView
+            android:id="@+id/icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="@id/physical_activity"
+            app:layout_constraintBottom_toBottomOf="@id/physical_activity"
+            app:layout_constraintStart_toStartOf="@id/physical_activity"
+            app:layout_constraintEnd_toEndOf="@id/physical_activity"
+            android:background="@drawable/ic_baby"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/physical_activity"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/dark"
+            android:fontFamily="@font/sf_pro_text_medium"
+            app:layout_constraintTop_toBottomOf="@id/icon3"
+            app:layout_constraintStart_toStartOf="@id/physical_activity"
+            app:layout_constraintEnd_toEndOf="@id/physical_activity"/>
+
+        <View
+            android:id="@+id/mental_activity"
+            android:layout_width="164dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/bg_wish_unselected"
+            android:backgroundTint="#ffffff"
+            app:layout_constraintStart_toEndOf="@id/food"
+            app:layout_constraintTop_toBottomOf="@id/physical_activity"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/icon4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="@id/mental_activity"
+            app:layout_constraintBottom_toBottomOf="@id/mental_activity"
+            app:layout_constraintStart_toStartOf="@id/mental_activity"
+            app:layout_constraintEnd_toEndOf="@id/mental_activity"
+            android:background="@drawable/ic_baby"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/mental_activity"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/dark"
+            android:fontFamily="@font/sf_pro_text_medium"
+            app:layout_constraintTop_toBottomOf="@id/icon4"
+            app:layout_constraintStart_toStartOf="@id/mental_activity"
+            app:layout_constraintEnd_toEndOf="@id/mental_activity"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

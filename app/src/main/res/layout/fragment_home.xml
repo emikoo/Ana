@@ -21,7 +21,6 @@
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_16"
                 android:background="@drawable/ic_logo"
-                android:text="@string/hello_blank_fragment"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,16 +33,6 @@
                 android:background="@drawable/ic_notification"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/btn_search"
-                android:layout_width="@dimen/dp_24"
-                android:layout_height="@dimen/dp_24"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:background="@drawable/ic_search"
-                app:layout_constraintEnd_toStartOf="@id/btn_notification"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -54,7 +43,7 @@
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_24"
             android:fontFamily="@font/sf_pro_display_medium"
-            android:text="Hello,"
+            tools:text="Hello,"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_24" />
 
@@ -91,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_8"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Add child"
+                android:text="@string/add_child"
                 android:textSize="@dimen/sp_24"
                 app:layout_constraintBottom_toBottomOf="@id/btn_add_first_child"
                 app:layout_constraintStart_toEndOf="@id/iv_add"
@@ -138,147 +127,49 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:id="@+id/buttons"
+            android:id="@+id/contact"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:gravity="center_horizontal"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/bg_button_selected"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/diary"
-                android:layout_width="74dp"
+            <ImageView
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:background="@drawable/ic_call"/>
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_34"
-                    android:layout_height="@dimen/dp_34"
-                    android:background="@drawable/ic_notes" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:fontFamily="@font/sf_pro_text_regular"
-                    android:text="Child’s diary"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark"
-                    android:textSize="@dimen/sp_13" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/book"
-                android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_34"
-                    android:layout_height="@dimen/dp_34"
-                    android:background="@drawable/ic_book" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:fontFamily="@font/sf_pro_text_regular"
-                    android:text="Receipt book"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark"
-                    android:textSize="@dimen/sp_13" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/expert"
-                android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_34"
-                    android:layout_height="@dimen/dp_34"
-                    android:background="@drawable/ic_expert" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:fontFamily="@font/sf_pro_text_regular"
-                    android:text="Contact with expert"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark"
-                    android:textSize="@dimen/sp_13" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/plan"
-                android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_34"
-                    android:layout_height="@dimen/dp_34"
-                    android:background="@drawable/ic_expert" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:fontFamily="@font/sf_pro_text_regular"
-                    android:text="Individual plan"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark"
-                    android:textSize="@dimen/sp_13" />
-            </LinearLayout>
+                android:text="@string/contact_with_specialists"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sf_pro_text_medium"
+                android:layout_marginStart="@dimen/dp_8"/>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/advices"
+            android:id="@+id/advice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             android:fontFamily="@font/sf_pro_text_medium"
-            android:text="@string/weekly_advices"
-            android:textColor="@color/dark"
-            android:textSize="17sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_advices"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_advice" />
-
-        <TextView
-            android:id="@+id/popular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            android:fontFamily="@font/sf_pro_text_medium"
-            android:text="@string/popular"
+            android:text="@string/individual_advices"
             android:textColor="@color/dark"
             android:textSize="17sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_popular"
+            android:id="@+id/list_articles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/dp_16"
-            tools:listitem="@layout/item_popular" />
+            android:layout_marginTop="@dimen/dp_8"
+            tools:listitem="@layout/item_advice" />
     </LinearLayout>
 </ScrollView>

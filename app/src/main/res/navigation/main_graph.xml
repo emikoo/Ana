@@ -17,6 +17,22 @@
             android:id="@+id/action_homeFragment_to_chatFragment"
             app:destination="@id/chatFragment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_childDetailFragment"
+            app:destination="@id/childDetailFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -25,7 +41,9 @@
         tools:layout="@layout/fragment_chat" >
         <action
             android:id="@+id/action_chatFragment_self"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -35,6 +53,10 @@
         <action
             android:id="@+id/action_profileFragment_self"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:popUpTo="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/selfCareFragment"
@@ -62,6 +84,10 @@
             app:popUpTo="@id/selfCareFragment"
             app:popUpToInclusive="true"
             app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_selfCareFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:popUpTo="@id/selfCareFragment" />
     </fragment>
     <fragment
         android:id="@+id/meditationFragment"
@@ -139,4 +165,53 @@
             app:popUpToInclusive="true"
             app:popUpToSaveState="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/childDetailFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.home.child.ChildDetailFragment"
+        android:label="fragment_child_detail"
+        tools:layout="@layout/fragment_child_detail" >
+
+        <argument app:argType="string"
+            android:name="childName"/>
+
+        <action
+            android:id="@+id/action_childDetailFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:popUpTo="@id/childDetailFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_childDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.home.child.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" >
+
+        <argument android:name="categoryName"
+            app:argType="string"/>
+
+        <argument android:name="childName"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_articleFragment_to_childDetailFragment"
+            app:destination="@id/childDetailFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+        <action
+            android:id="@+id/action_articleFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpToSaveState="false"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.ana.presentation.ui.fragments.main.notifications.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

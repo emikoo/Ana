@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textAlignment="center"
-            android:text="Didn't get the code?"
+            android:text="@string/didn_t_get_the_code"
             android:textColor="@color/grey"
             android:visibility="gone"
             android:fontFamily="@font/sf_pro_text_semibold"

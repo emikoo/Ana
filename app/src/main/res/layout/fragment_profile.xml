@@ -24,16 +24,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_search"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
-            android:background="@drawable/ic_search"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
-            app:layout_constraintEnd_toStartOf="@id/btn_notification"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -137,12 +127,10 @@
         android:id="@+id/tab"
         app:tabRippleColor="@null"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@drawable/tab_background"
         app:tabBackground="@drawable/tab_unselected"
         app:tabTextColor="@color/dark"
-        android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_gravity="center_vertical"
         app:tabSelectedTextColor="@color/white"

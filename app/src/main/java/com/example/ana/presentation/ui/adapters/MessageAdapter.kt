@@ -64,7 +64,7 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
         private val timeTextView: TextView = itemView.findViewById(R.id.textTime)
 
         fun bind(message: ChatMessage) {
-            if (message.response.trim().isBlank()) messageTextView.text = "Печатает..."
+            if (message.response.trim().isBlank()) messageTextView.text = itemView.context.getString(R.string.typing)
             else messageTextView.text = message.response
             timeTextView.text = message.timestampShort
         }

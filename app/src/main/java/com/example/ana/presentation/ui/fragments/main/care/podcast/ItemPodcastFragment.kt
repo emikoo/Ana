@@ -49,7 +49,7 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
                 .into(binding.preview)
             binding.author.text = podcast.author
             viewModel.updateViews(podcast.id, podcast.views+1)
-            binding.views.text = "${podcast.views} views"
+            binding.views.text = "${podcast.views} " + getString(R.string.views)
             progressDialog.dismiss()
             showVideo(podcast.url)
         }

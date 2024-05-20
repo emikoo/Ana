@@ -3,7 +3,6 @@ package com.example.ana.presentation.ui.fragments.main.chat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ana.data.model.ChatMessage
@@ -12,6 +11,7 @@ import com.example.ana.databinding.FragmentChatBinding
 import com.example.ana.presentation.ui.adapters.MessageAdapter
 import com.example.ana.view_model.MessagesViewModel
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.ListenerRegistration
 import com.teenteen.teencash.presentation.base.BaseFragment
 
 class ChatFragment : BaseFragment<FragmentChatBinding>() {
@@ -20,6 +20,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private lateinit var chatMessages: MutableList<ChatMessage>
     private lateinit var viewModel: MessagesViewModel
     private var pressed = false
+    private var messageListener: ListenerRegistration? = null
 
     override fun attachBinding(
         list: MutableList<FragmentChatBinding>,
@@ -33,7 +34,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun setupViews() {
         progressDialog.show()
         chatMessages = mutableListOf()
-        chatMessages.clear()
         adapter = MessageAdapter(chatMessages)
         viewModel = ViewModelProvider(this)[MessagesViewModel::class.java]
         binding.rvChat.adapter = adapter
@@ -53,7 +53,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     override fun subscribeToLiveData() {
         viewModel.messages.observe(viewLifecycleOwner) {
-            setupMessageListener()
+            if (messageListener == null) {
+                setupMessageListener()
+            }
             progressDialog.dismiss()
         }
 
@@ -76,7 +78,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun setupMessageListener() {
-        db.collection("users").document(prefs.getCurrentUserId()).collection("messages")
+        messageListener?.remove()
+
+        messageListener = db.collection("users").document(prefs.getCurrentUserId()).collection("messages")
             .orderBy("timestampFull")
             .addSnapshotListener { snapshots, e ->
                 if (e != null) {
@@ -87,29 +91,40 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 for (dc in snapshots!!.documentChanges) {
                     if (dc.type == DocumentChange.Type.ADDED) {
                         val message = dc.document.toObject(ChatMessage::class.java)
-                        val user = ChatMessage(
-                            parentMessageId = message.parentMessageId,
-                            senderId = message.senderId,
-                            response = "",
-                            prompt = message.prompt,
-                            timestampFull = message.timestampFull,
-                            timestampShort = message.timestampShort,
-                            type = MessageType.USER
-                        )
-                        updateUIWithMessage(user)
-                        val bot = ChatMessage(
-                            parentMessageId = message.parentMessageId,
-                            senderId = message.senderId,
-                            response = message.response,
-                            prompt = "",
-                            timestampFull = message.timestampFull,
-                            timestampShort = message.timestampShort,
-                            type = MessageType.BOT
-                        )
-                        updateUIWithMessage(bot)
+                        handleNewMessage(message)
                     }
                 }
             }
+    }
+
+    private fun handleNewMessage(message: ChatMessage) {
+        if (!chatMessages.any { it.timestampFull == message.timestampFull && it.senderId == message.senderId && it.prompt == message.prompt && it.response == message.response }) {
+            if (message.prompt.isNotEmpty()) {
+                val userMessage = ChatMessage(
+                    parentMessageId = message.parentMessageId,
+                    senderId = message.senderId,
+                    response = "",
+                    prompt = message.prompt,
+                    timestampFull = message.timestampFull,
+                    timestampShort = message.timestampShort,
+                    type = MessageType.USER
+                )
+                updateUIWithMessage(userMessage)
+            }
+
+            if (message.response.isNotEmpty()) {
+                val botMessage = ChatMessage(
+                    parentMessageId = message.parentMessageId,
+                    senderId = message.senderId,
+                    response = message.response,
+                    prompt = "",
+                    timestampFull = message.timestampFull,
+                    timestampShort = message.timestampShort,
+                    type = MessageType.BOT
+                )
+                updateUIWithMessage(botMessage)
+            }
+        }
     }
 
     private fun updateUIWithMessage(message: ChatMessage) {
@@ -120,7 +135,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun updateResponse(message: ChatMessage) {
-        adapter.removeLastItem()
         chatMessages.add(message)
         adapter.notifyItemInserted(chatMessages.size - 1)
         binding.rvChat.scrollToPosition(chatMessages.size - 1)
@@ -130,6 +144,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun onPause() {
         super.onPause()
         pressed = false
-//        Toast.makeText(requireContext(), "Pause", Toast.LENGTH_SHORT).show()
+        messageListener?.remove()
+        messageListener = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        chatMessages.clear()
+        adapter.notifyDataSetChanged()
     }
 }

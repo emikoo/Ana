@@ -55,7 +55,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
@@ -75,8 +75,8 @@
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_8"
         app:layout_constraintBottom_toBottomOf="@id/card_preview"
-        app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
         android:background="@drawable/ic_time"/>
 
     <TextView

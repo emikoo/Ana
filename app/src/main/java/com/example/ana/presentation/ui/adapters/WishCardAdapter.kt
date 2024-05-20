@@ -46,11 +46,10 @@ class WishCardAdapter(
     }
 
     class WishCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val name: TextView = itemView.findViewById(R.id.name)
+        private val name: TextView = itemView.findViewById(R.id.title)
         private val icon: ImageView = itemView.findViewById(R.id.icon)
         private val image: ImageView = itemView.findViewById(R.id.image)
         private val placeholder: ImageView = itemView.findViewById(R.id.placeholder)
-        private val layout: LinearLayout = itemView.findViewById(R.id.layout)
 
         fun bind(sector: WishCard) {
             when (sector.itemSection) {

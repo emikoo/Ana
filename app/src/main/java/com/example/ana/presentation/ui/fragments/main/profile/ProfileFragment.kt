@@ -23,6 +23,7 @@ import com.example.ana.databinding.FragmentProfileBinding
 import com.example.ana.presentation.extensions.updateLanguage
 import com.example.ana.presentation.ui.activity.MainActivity
 import com.example.ana.presentation.ui.fragments.main.care.wishcard.WishCardFragment
+import com.example.ana.presentation.ui.fragments.main.home.HomeFragmentDirections
 import com.example.ana.view_model.HomeViewModel
 import com.google.android.material.tabs.TabLayout
 import com.teenteen.teencash.presentation.base.BaseFragment
@@ -56,6 +57,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
         binding.logOut.setOnClickListener { restart() }
         binding.camera.setOnClickListener { openGalleryForImage() }
+        binding.btnNotification.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToNotificationFragment())
+        }
     }
 
     private fun setEditViews() {
@@ -100,9 +104,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         tabLayout.setBackgroundColor(Color.parseColor("#F0EDFF"))
         tabLayout.removeAllTabs()
 
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("Kazakh")))
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("Russian")))
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("English")))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.kazakh))))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.russian))))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.english))))
         setInitialTabSelection()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             @SuppressLint("RestrictedApi")

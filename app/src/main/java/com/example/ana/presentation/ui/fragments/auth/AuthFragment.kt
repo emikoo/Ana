@@ -72,7 +72,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                             count: Int
                         ) {
                             binding.error.setTextColor(resources.getColor(R.color.grey))
-                            binding.error.text = "Пожалуйста пишите в формате +7##########"
+                            binding.error.text = getString(R.string.please_write_in_format)
                         }
                     })
                 }
@@ -82,7 +82,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     if (binding.smsCodeView.enteredCode.length == 6) {
                         verifyVerificationCode(code)
                     } else {
-                        binding.subtitle.text = "Wrong code. Please try again"
+                        binding.subtitle.text = getString(R.string.wrong_code_please_try_again)
                     }
                 }
 
@@ -121,7 +121,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.btnBack.visibility = View.VISIBLE
         binding.title.text = getString(R.string.type_sms_code)
         binding.subtitle.text =
-            "A confirmation code was sent to the number " + binding.input.text.toString()
+            getString(R.string.a_confirmation_code_was_sent_to_the_number) + binding.input.text.toString()
         binding.resend.visibility = View.VISIBLE
         binding.error.visibility = View.GONE
     }
@@ -133,10 +133,10 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.textField.visibility = View.VISIBLE
         binding.title.text = getString(R.string.authorization)
         binding.subtitle.text = getString(R.string.by_phone_number)
-        binding.textField.hint = "Phone number"
+        binding.textField.hint = getString(R.string.phone_number)
         binding.input.inputType = InputType.TYPE_CLASS_PHONE
         binding.error.setTextColor(resources.getColor(R.color.grey))
-        binding.error.text = "Пожалуйста пишите в формате +7##########"
+        binding.error.text = getString(R.string.please_write_in_format)
         binding.error.visibility = View.VISIBLE
         binding.resend.visibility = View.GONE
     }
@@ -148,7 +148,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.textField.visibility = View.VISIBLE
         binding.title.text = getString(R.string.authorization)
         binding.subtitle.text = getString(R.string.what_s_your_name)
-        binding.textField.hint = "Your name"
+        binding.textField.hint = getString(R.string.your_name)
         binding.input.inputType = InputType.TYPE_CLASS_TEXT
         binding.error.setTextColor(resources.getColor(R.color.grey))
         binding.resend.visibility = View.GONE
@@ -191,7 +191,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        binding.subtitle.text = "Wrong code. Please try again"
+                        binding.subtitle.text = getString(R.string.wrong_code_please_try_again)
                     }
                 }
             }

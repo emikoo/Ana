@@ -14,7 +14,6 @@
         android:layout_marginTop="@dimen/dp_16"
         android:background="@drawable/ic_logo"
         android:backgroundTint="@color/white"
-        android:text="@string/hello_blank_fragment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,17 +26,6 @@
         android:background="@drawable/ic_notification"
         android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btn_search"
-        android:layout_width="@dimen/dp_24"
-        android:layout_height="@dimen/dp_24"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_16"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/ic_search"
-        app:layout_constraintEnd_toStartOf="@id/btn_notification"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -82,7 +70,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/premium_view"
         app:layout_constraintStart_toStartOf="@id/premium_view"
-        android:text="Premium"
+        android:text="@string/premium"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:fontFamily="@font/sf_pro_display_medium"
@@ -106,7 +94,7 @@
         app:layout_constraintStart_toStartOf="@id/premium_title"
         app:layout_constraintBottom_toBottomOf="@id/premium_view"
         android:layout_marginBottom="@dimen/dp_24"
-        android:text="Take full advantage"
+        android:text="@string/take_full_advantage"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:fontFamily="@font/sf_pro_display_regular"/>

@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.view.LayoutInflater
 import com.example.ana.R
 
@@ -21,4 +23,22 @@ class ProgressDialog {
             return dialog
         }
     }
+}
+
+fun checkInternetConnection(connectedAction: () -> Unit , context: Context , noInternetAction: () -> Unit) {
+    if (internetIsConnected(context)) {
+        connectedAction()
+    } else {
+        noInternetAction()
+    }
+}
+
+fun internetIsConnected(context: Context): Boolean {
+    var connected = false
+    val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    connected =
+        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)!!.state == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)!!.state == NetworkInfo.State.CONNECTED
+    return connected
 }

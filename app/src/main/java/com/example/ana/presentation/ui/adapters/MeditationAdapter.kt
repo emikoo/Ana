@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ana.R
 import com.example.ana.data.model.Meditation
-import com.example.ana.data.model.Podcast
 
 interface MeditationInterface {
     fun onLockedSelected(meditation: Meditation)
@@ -36,7 +35,7 @@ class MeditationAdapter(private val meditation: MutableList<Meditation>,
     override fun getItemCount() = meditation.size
 
     class MeditationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val name: TextView = itemView.findViewById(R.id.name)
+        private val name: TextView = itemView.findViewById(R.id.title)
         private val preview: ImageView = itemView.findViewById(R.id.preview)
         private val lock: ImageView = itemView.findViewById(R.id.lock)
         private val total_sessions: TextView = itemView.findViewById(R.id.total_sessions)
@@ -44,7 +43,7 @@ class MeditationAdapter(private val meditation: MutableList<Meditation>,
 
         fun bind(meditation: Meditation) {
             name.text = meditation.name
-            total_sessions.text = "${meditation.sessions} sessions"
+            total_sessions.text = meditation.sessions.toString() + itemView.context.getString(R.string.sessions)
             sessions.text = "${meditation.count}/${meditation.sessions}"
             if (!meditation.locked) lock.visibility = View.GONE
             else lock.visibility = View.VISIBLE
