@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ana</string>
+    <string name="app_name" translatable="false">Ana</string>
     <string name="next">Next</string>
     <string name="welcome">Добро пожаловать в Ana!</string>
     <string name="subtitle_onboarding1">Ana - безопасное пространство для женщин. встретиться и найти поддержку.</string>
@@ -85,4 +85,7 @@
     <string name="gratitude_diary">Gratitude diary</string>
     <string name="insights">Insights</string>
     <string name="keep_calm_and_do_meditation">Keep calm and do meditation</string>
+    <string name="menu_home">Home</string>
+    <string name="self_care">Self-care</string>
+    <string name="consultant">Consultant</string>
 </resources>

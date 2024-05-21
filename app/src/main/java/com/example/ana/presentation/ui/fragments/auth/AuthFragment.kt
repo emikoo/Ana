@@ -190,6 +190,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     checkDocumentExists()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
+
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         binding.subtitle.text = getString(R.string.wrong_code_please_try_again)
                     }
