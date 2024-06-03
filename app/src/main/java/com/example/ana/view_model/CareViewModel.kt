@@ -72,4 +72,10 @@ class CareViewModel : ViewModel() {
             FirebaseCareService.updateSessionCount(count)
         }
     }
+
+    fun updateSoundTried(soundId: Int) {
+        viewModelScope.launch {
+            FirebaseCareService.updateSoundTried(soundId)
+        }
+    }
 }

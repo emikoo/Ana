@@ -42,8 +42,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         binding.send.setOnClickListener {
             val messageText = binding.etMessage.text.trim().toString()
             if (messageText.isNotEmpty()) {
-                viewModel.sendMessage(prefs.getCurrentUserId(), messageText)
                 progressDialog.show()
+                viewModel.sendMessage(prefs.getCurrentUserId(), messageText)
                 viewModel.monitorLastMessage(prefs.getCurrentUserId(), messageText)
                 binding.etMessage.setText("")
             }
@@ -53,10 +53,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     override fun subscribeToLiveData() {
         viewModel.messages.observe(viewLifecycleOwner) {
+            progressDialog.dismiss()
             if (messageListener == null) {
                 setupMessageListener()
             }
-            progressDialog.dismiss()
         }
 
         viewModel.lastMessage.observe(viewLifecycleOwner) { message ->
@@ -79,7 +79,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private fun setupMessageListener() {
         messageListener?.remove()
-
         messageListener = db.collection("users").document(prefs.getCurrentUserId()).collection("messages")
             .orderBy("timestampFull")
             .addSnapshotListener { snapshots, e ->
@@ -131,7 +130,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         chatMessages.add(message)
         adapter.notifyItemInserted(chatMessages.size - 1)
         binding.rvChat.scrollToPosition(chatMessages.size - 1)
-        progressDialog.dismiss()
+//        progressDialog.dismiss()
     }
 
     private fun updateResponse(message: ChatMessage) {

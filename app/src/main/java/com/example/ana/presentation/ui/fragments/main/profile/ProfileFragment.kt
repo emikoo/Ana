@@ -2,6 +2,7 @@ package com.example.ana.presentation.ui.fragments.main.profile
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -27,7 +28,7 @@ import com.example.ana.presentation.ui.fragments.main.home.HomeFragmentDirection
 import com.example.ana.view_model.HomeViewModel
 import com.google.android.material.tabs.TabLayout
 import com.teenteen.teencash.presentation.base.BaseFragment
-
+import java.lang.RuntimeException
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private lateinit var viewModel: HomeViewModel
@@ -55,11 +56,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 }
             }
         }
-        binding.logOut.setOnClickListener { restart() }
+        binding.logOut.setOnClickListener {
+            progressDialog.show()
+            restart() }
         binding.camera.setOnClickListener { openGalleryForImage() }
         binding.btnNotification.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToNotificationFragment())
         }
+    }
+
+    private fun setStrings() {
+        binding.profile.setText(R.string.profile)
+        binding.tLogOut.setText(R.string.log_out)
     }
 
     private fun setEditViews() {
@@ -103,7 +111,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         tabLayout.setSelectedTabIndicatorHeight(0)
         tabLayout.setBackgroundColor(Color.parseColor("#F0EDFF"))
         tabLayout.removeAllTabs()
-
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.kazakh))))
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.russian))))
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.english))))
@@ -123,7 +130,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                         PreferenceManager(requireContext()).updateLanguage("eng", requireContext(), prefs)
                     }
                 }
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentSelf())
+                setStrings()
             }
             override fun onTabUnselected(tab: TabLayout.Tab) { setUnselectedTab(tab) }
             override fun onTabReselected(tab: TabLayout.Tab) {}
@@ -178,6 +185,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         startActivity(intent)
         requireActivity().overridePendingTransition(R.anim.pop_in, R.anim.pop_out)
         requireActivity().finishAffinity()
+        progressDialog.dismiss()
     }
 
     override fun subscribeToLiveData() {
@@ -185,7 +193,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             binding.name.setText(it)
         }
         viewModel.photo.observe(viewLifecycleOwner) {
-            if (it.isNotBlank()) binding.profilePicture.scaleType = ImageView.ScaleType.CENTER_CROP
+            if (!it.isNullOrEmpty()) binding.profilePicture.scaleType = ImageView.ScaleType.CENTER_CROP
             else binding.profilePicture.scaleType = ImageView.ScaleType.CENTER_INSIDE
             Glide.with(this)
                 .load(it)

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ana.R
 import com.example.ana.data.model.Advice
 import com.example.ana.data.model.Child
@@ -18,6 +20,8 @@ import com.example.ana.presentation.ui.adapters.AdviceSelector
 import com.example.ana.presentation.ui.adapters.ChildSelector
 import com.example.ana.presentation.ui.fragments.main.home.child.ChildAuthBottomSheet
 import com.example.ana.presentation.ui.fragments.main.home.child.UpdateData
+import com.example.ana.presentation.utills.ItemSimpleTouch
+import com.example.ana.presentation.utills.showActionSnackbar
 import com.example.ana.view_model.HomeViewModel
 import com.teenteen.teencash.presentation.base.BaseFragment
 
@@ -43,6 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         viewModel.getUserName(prefs.getCurrentUserId())
         setupArticles()
+        deleteSwipeAction()
         binding.contact.setOnClickListener { openWhatsApp() }
         viewModel.getChildren(prefs.getCurrentUserId())
         binding.btnNotification.setOnClickListener {
@@ -51,7 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
     }
 
     private fun setupArticles() {
-        viewModel.getAdvices()
+        viewModel.getAdvices(prefs.getSettingsLanguage())
         binding.listArticles.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
@@ -118,11 +123,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
         viewModel.getChildren(prefs.getCurrentUserId())
     }
 
+    private fun deleteSwipeAction() {
+        val swipeHandler = object : ItemSimpleTouch(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val child = children[position]
+                viewModel.deleteChild(prefs.getCurrentUserId(), child.name)
+                childAdapter.deleteChild(position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvChildren)
+    }
+
     override fun onAdvicePressed(advice: Advice) {
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(advice.category, ""))
     }
 
     override fun onChildPressed(child: Child) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChildDetailFragment(child.name))
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChildDetailFragment(child.name, child.image.toString()))
     }
 }

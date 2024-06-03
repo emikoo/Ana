@@ -27,9 +27,9 @@ class AdviceViewModel : ViewModel() {
             _articlesByChild.value = FirebaseAdviceService.getArticlesByCategoryAndChildBirthdate(categoryName, birthdate)
         }
     }
-    fun getArticlesByCategory(categoryName: String) {
+    fun getArticlesByCategory(lang: String, categoryName: String) {
         viewModelScope.launch {
-            _articlesByChild.value = FirebaseAdviceService.getArticlesByCategory(categoryName)
+            _articlesByChild.value = FirebaseAdviceService.getArticlesByCategory(lang, categoryName)
         }
     }
 }

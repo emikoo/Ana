@@ -39,15 +39,21 @@ class HomeViewModel(): ViewModel() {
         }
     }
 
-    fun getAdvices() {
+    fun getAdvices(lang: String) {
         viewModelScope.launch {
-            _advices.value = FirebaseHomeService.getAdvices().toMutableList()
+            _advices.value = FirebaseHomeService.getAdvices(lang).toMutableList()
         }
     }
 
     fun addChild(uid: String, child: Child) {
         viewModelScope.launch {
             FirebaseHomeService.addChild(uid, child)
+        }
+    }
+
+    fun deleteChild(uid: String, childName: String) {
+        viewModelScope.launch {
+            FirebaseHomeService.deleteChild(uid, childName)
         }
     }
 

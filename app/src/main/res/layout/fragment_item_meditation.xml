@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_18"
         style="@style/ToolbarText"
-        android:text="Savor the moment!"
+        android:text="@string/savor_the_moment"
         app:layout_constraintTop_toBottomOf="@id/card"
         app:layout_constraintStart_toStartOf="@id/card"
         app:layout_constraintEnd_toEndOf="@id/card"/>
@@ -154,7 +154,7 @@
         android:textColor="@color/dark"
         android:textSize="@dimen/sp_13"
         android:fontFamily="@font/sf_pro_text_regular"
-        android:text="Immerse yourself in a world of deep inner peace with this meditation. Tune into the moment of presence, free your mind from worry and tension. Allow yourself to immerse yourself in your thoughts, sensations and emotions without judging or becoming attached to them."
+        android:text="@string/description_short"
         android:layout_marginStart="@dimen/dp_16"
         app:layout_constraintTop_toBottomOf="@id/text"
         app:layout_constraintStart_toStartOf="parent"

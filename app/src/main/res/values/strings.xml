@@ -1,24 +1,24 @@
 <resources>
-    <string name="app_name" translatable="false">Ana</string>
+    <string name="app_name">Ana</string>
     <string name="next">Next</string>
-    <string name="welcome">Добро пожаловать в Ana!</string>
-    <string name="subtitle_onboarding1">Ana - безопасное пространство для женщин. встретиться и найти поддержку.</string>
-    <string name="title_onboarding2">Платформа все в одном</string>
-    <string name="subtitle_onboarding2">Общайтесь с женщинами, которые находятся на аналогичном этапе жизни – от фертильности, беременности и материнства до менопаузы.</string>
-    <string name="title_onboarding3">Безопасное пространство</string>
-    <string name="subtitle_onboarding3"><![CDATA[Ana предоставляет доступ к сообществу, которое готово выслушать, поделиться информацией и дать ценный совет ]]></string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="welcome">Welcome to ANA</string>
+    <string name="subtitle_onboarding1">ANA is a safe space for women to meet and find support.</string>
+    <string name="title_onboarding2">All-in-one platform</string>
+    <string name="subtitle_onboarding2">Space for women at all life stages, offering meditations, a gratitude journal, relaxing podcasts, a vision board, and 24/7 online consultant support.</string>
+    <string name="title_onboarding3">MomMentor Alerts</string>
+    <string name="subtitle_onboarding3"><![CDATA[App provides timely notifications with tailored advice for each stage of child development to keep mothers informed and prepared ]]></string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start">Начать</string>
     <string name="policy">Please keep your username and password confidential. By continuing, you accept <font color='#F29B27'>Ana\'s policies</font> and <font color='#F29B27'>terms and conditions</font></string>
     <string name="authorization">Authorization</string>
     <string name="by_phone_number">By phone number</string>
-    <string name="error_phone_number1">Укажите номер для выбранной страны</string>
+    <string name="error_phone_number1">Enter the number for the selected country</string>
     <string name="phone_number">Phone number</string>
     <string name="get_code">Get code</string>
     <string name="sign_in">Sign In</string>
-    <string name="russian">Russian</string>
-    <string name="type_sms_code">Введите код из СМС</string>
+    <string name="russian">Русский</string>
+    <string name="type_sms_code">Enter the code from the SMS</string>
     <string name="what_s_your_name">What’s your name?</string>
     <string name="weekly_advices">Weekly advices</string>
     <string name="age">Child\'s age</string>
@@ -53,10 +53,10 @@
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="weeks">" weeks | "</string>
     <string name="sessions">" sessions"</string>
-    <string name="typing">Печатает...</string>
+    <string name="typing">Typing...</string>
     <string name="min">min</string>
     <string name="sec">sec</string>
-    <string name="please_write_in_format">Пожалуйста пишите в формате +7##########</string>
+    <string name="please_write_in_format">Please write in the format +7##########</string>
     <string name="wrong_code_please_try_again">Wrong code. Please try again</string>
     <string name="a_confirmation_code_was_sent_to_the_number">"A confirmation code was sent to the number "</string>
     <string name="your_name">Your name</string>
@@ -72,7 +72,7 @@
     <string name="thank_you_for_provided_information">Thank you for provided information</string>
     <string name="camera_and_storage_permissions_are_needed_to_take_pictures">Camera and Storage permissions are needed to take pictures</string>
     <string name="hello">Hello</string>
-    <string name="kazakh">Kazakh</string>
+    <string name="kazakh">Қазақ</string>
     <string name="english">English</string>
     <string name="didn_t_get_the_code">Didn\'t get the code?</string>
     <string name="description">Description</string>
@@ -88,4 +88,13 @@
     <string name="menu_home">Home</string>
     <string name="self_care">Self-care</string>
     <string name="consultant">Consultant</string>
+    <string name="savor_the_moment">Savor the moment!</string>
+    <string name="year">" year"</string>
+    <string name="month">" month"</string>
+    <string name="days">" days"</string>
+    <string-array name="languages">
+        <item>English</item>
+        <item>Қазақ</item>
+        <item>Русский</item>
+    </string-array>
 </resources>

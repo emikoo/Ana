@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/ToolbarText"
@@ -150,6 +151,7 @@
         android:layout_marginEnd="@dimen/dp_16">
 
         <TextView
+            android:id="@+id/t_log_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|bottom"

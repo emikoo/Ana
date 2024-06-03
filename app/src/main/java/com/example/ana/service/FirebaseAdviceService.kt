@@ -33,9 +33,9 @@ object FirebaseAdviceService {
         }
     }
 
-    suspend fun getArticlesByCategory(categoryName: String): List<Advice> {
+    suspend fun getArticlesByCategory(lang: String, categoryName: String): List<Advice> {
         return try {
-            val articles = db.collection("advices")
+            val articles = db.collection("advices").whereEqualTo("language", lang)
                 .whereEqualTo("category", categoryName)
             articles.get()
                 .await()

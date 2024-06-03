@@ -42,16 +42,23 @@ class ArticleAdapter(private val articles: MutableList<Advice>) : RecyclerView.A
                 .placeholder(R.drawable.ic_logo)
                 .into(image)
             read.setOnClickListener {
-                    article.visibility = View.VISIBLE
-                    article.text = advice.article
-                    read.visibility = View.GONE
-                    flag = true
+                read(advice.article)
             }
             book.setOnClickListener {
-                    article.visibility = View.VISIBLE
-                    article.text = advice.article
-                    read.visibility = View.GONE
-                    flag = true
+                read(advice.article)
+            }
+        }
+        private fun read(adviceArticle: String){
+            if (!flag) {
+                article.visibility = View.VISIBLE
+                article.text = adviceArticle
+                read.visibility = View.GONE
+                flag = true
+            } else {
+                article.visibility = View.GONE
+                read.visibility = View.VISIBLE
+                read.setText(R.string.read)
+                flag = false
             }
         }
     }

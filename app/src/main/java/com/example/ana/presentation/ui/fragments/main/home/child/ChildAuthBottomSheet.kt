@@ -87,6 +87,7 @@ class ChildAuthBottomSheet(private val updater: UpdateData) :
         state = Screen.AGE
         binding.title.text = getString(R.string.when_was_the_baby_born)
         binding.button1.text = getString(R.string.next)
+        binding.datePicker.maxDate = System.currentTimeMillis()
     }
 
     private fun setupNameScreen() {

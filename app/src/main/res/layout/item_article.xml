@@ -68,7 +68,7 @@
         app:layout_constraintTop_toTopOf="@id/book"
         app:layout_constraintBottom_toBottomOf="@id/book"
         app:layout_constraintStart_toEndOf="@id/book"
-        android:layout_marginStart="@dimen/dp_4"
+        android:layout_marginStart="@dimen/dp_16"
         android:textColor="@color/dark"
         android:fontFamily="@font/sf_pro_text_regular"
         android:textSize="@dimen/sp_13"

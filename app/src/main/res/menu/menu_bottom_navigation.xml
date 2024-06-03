@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/homeFragment"
-        android:title="@string/menu_home"
+        android:title="Home"
         android:icon="@drawable/botnav_home"
         app:showAsAction="always"
         android:enabled="true"/>
 
     <item android:id="@+id/selfCareFragment"
-        android:title="@string/self_care"
+        android:title="Self-care"
         android:icon="@drawable/botnav_care"
         app:showAsAction="always"
         android:enabled="true"/>
 
     <item android:id="@+id/chatFragment"
-        android:title="@string/consultant"
+        android:title="Consultant"
         android:icon="@drawable/botnav_chat"
         android:enabled="true"
         app:showAsAction="always"/>
 
     <item android:id="@+id/profileFragment"
-        android:title="@string/profile"
+        android:title="Profile"
         android:enabled="true"
         android:icon="@drawable/botnav_profile"
         app:showAsAction="always"/>

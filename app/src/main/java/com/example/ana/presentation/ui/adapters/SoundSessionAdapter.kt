@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ana.R
@@ -13,6 +14,8 @@ import com.example.ana.data.model.SoundSession
 
 interface SoundPlayer {
     fun soundPlay(soundUrl: String)
+    fun soundStop()
+    fun increaseCount(soundId: Int)
 }
 
 class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val player: SoundPlayer):  RecyclerView.Adapter<SoundSessionAdapter.SoundViewHolder>() {
@@ -34,6 +37,7 @@ class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val 
         private val name: TextView = itemView.findViewById(R.id.title)
         private val preview: ImageView = itemView.findViewById(R.id.preview)
         private val ibPlayer: ImageButton = itemView.findViewById(R.id.ib_player)
+        private val shape1: CardView = itemView.findViewById(R.id.shape1)
         private val duration: TextView = itemView.findViewById(R.id.duration)
         private var flag: Boolean = false
 
@@ -47,14 +51,16 @@ class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val 
             if (time.count() == 1) duration.text = time.first() + " " + itemView.context.getString(R.string.min)
             else duration.text = time.first() + " " + itemView.context.getString(R.string.min) + " "+ time.last() + " " + itemView.context.getString(
                             R.string.sec)
-            ibPlayer.setOnClickListener {
+            shape1.setOnClickListener {
                 if (!flag) {
                     flag = true
                     ibPlayer.setBackgroundResource(R.drawable.ic_pause_sharp)
                     player.soundPlay(soundSession.url)
+                    if (!soundSession.tried) player.increaseCount(soundSession.id)
                 } else {
                     flag = false
                     ibPlayer.setBackgroundResource(R.drawable.ic_play_sharp)
+                    player.soundStop()
                 }
             }
         }

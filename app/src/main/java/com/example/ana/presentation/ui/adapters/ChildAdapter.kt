@@ -31,6 +31,12 @@ class ChildAdapter(private val children: MutableList<Child>, val selector: Child
 
     override fun getItemCount() = children.size
 
+    fun deleteChild(position: Int) {
+        children.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
+    }
+
     class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val name: TextView = itemView.findViewById(R.id.title)
         private val age: TextView = itemView.findViewById(R.id.age)

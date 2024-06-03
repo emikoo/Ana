@@ -49,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="@id/premium_view"
         app:layout_constraintEnd_toEndOf="@id/premium_view"
         android:background="@drawable/bg_view_care"
-        android:layout_marginEnd="@dimen/dp_24"
+        android:layout_marginEnd="@dimen/dp_16"
         android:backgroundTint="#80493A97"
         style="@style/ButtonText"
         android:text="@string/subscribe"/>
@@ -88,14 +88,17 @@
 
     <TextView
         android:id="@+id/premium_subtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/premium_title"
         app:layout_constraintStart_toStartOf="@id/premium_title"
         app:layout_constraintBottom_toBottomOf="@id/premium_view"
-        android:layout_marginBottom="@dimen/dp_24"
+        app:layout_constraintEnd_toStartOf="@id/subscribe"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_32"
         android:text="@string/take_full_advantage"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
+        android:layout_marginEnd="@dimen/dp_16"
         android:fontFamily="@font/sf_pro_display_regular"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

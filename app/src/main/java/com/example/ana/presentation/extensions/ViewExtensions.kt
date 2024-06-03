@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.preference.PreferenceManager
+import com.example.ana.R
 import com.example.ana.data.local.PrefsSettings
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDate
@@ -17,7 +18,7 @@ fun BottomSheetDialogFragment.show(fragmentManager: FragmentManager?) {
     val bottomSheetDialogFragment: BottomSheetDialogFragment = this
     fragmentManager?.let {
         bottomSheetDialogFragment.show(
-            it ,
+            it,
             bottomSheetDialogFragment.tag
         )
     }
@@ -46,5 +47,8 @@ fun TextView.ageOfChild(birthdate: String) {
     val birthDate = LocalDate.parse(birthdate, formatter)
     val currentDate = LocalDate.now()
     val birthday = Period.between(birthDate, currentDate)
-    this.text = "${birthday.years} year, ${birthday.months} months, ${birthday.days} days"
+    val year = birthday.years.toString() + context.getString(R.string.year)
+    val month = birthday.months.toString() + context.getString(R.string.month)
+    val days = birthday.days.toString() + context.getString(R.string.days)
+    this.text = "$year $month $days"
 }

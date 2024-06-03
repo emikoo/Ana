@@ -34,9 +34,9 @@ object FirebaseHomeService {
         }
     }
 
-    suspend fun getAdvices(): List<Advice> {
+    suspend fun getAdvices(lang: String): List<Advice> {
         return try {
-            val array = db.collection("advices")
+            val array = db.collection("advices").whereEqualTo("language", lang)
             array.get().await()
                 .documents.mapNotNull { it.toAdvice() }
         } catch (e: Exception) {
@@ -52,6 +52,19 @@ object FirebaseHomeService {
             db.collection("users")
                 .document(userId)
                 .collection("children").document(child.name).set(child)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error adding child" , e)
+            FirebaseCrashlytics.getInstance().log("Error adding child")
+            FirebaseCrashlytics.getInstance().setCustomKey("user id" , userId)
+            FirebaseCrashlytics.getInstance().recordException(e)
+        }
+    }
+
+    fun deleteChild(userId: String, childName: String) {
+        try {
+            db.collection("users")
+                .document(userId)
+                .collection("children").document(childName).delete()
         } catch (e: Exception) {
             Log.e(TAG, "Error adding child" , e)
             FirebaseCrashlytics.getInstance().log("Error adding child")

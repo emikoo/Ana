@@ -20,7 +20,7 @@
         android:paddingBottom="@dimen/dp_8"
         android:textColor="#112042"
         android:textSize="16sp"
-        tools:text="dkjahfkjdshjkfhsdkj"
+        tools:text="Можете подсказать как менять подгузники детямдетям"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

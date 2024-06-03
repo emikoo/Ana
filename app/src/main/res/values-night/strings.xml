@@ -2,4 +2,8 @@
 <resources>
     <string name="self_care">Self-care</string>
     <string name="consultant">Consultant</string>
+    <string name="savor_the_moment">Savor the moment!</string>
+    <string name="year">" year"</string>
+    <string name="month">" month"</string>
+    <string name="days">" days"</string>
 </resources>

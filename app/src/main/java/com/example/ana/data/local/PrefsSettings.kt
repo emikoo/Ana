@@ -23,7 +23,7 @@ class PrefsSettings(context: Context) {
 
     fun getSettingsLanguage(): String {
         return prefs.getString(LANGUAGE , Locale.getDefault().language)
-            ?: Locale.getDefault().language
+            ?: "eng"
     }
 
     fun saveCurrentUserId(uid: String?) {

@@ -114,4 +114,23 @@ object FirebaseCareService {
             FirebaseCrashlytics.getInstance().recordException(e)
         }
     }
+
+    fun updateSoundTried(id: Int) {
+        try {
+            var docName = "first"
+            when (id) {
+                1 -> docName = "first"
+                2 -> docName = "second"
+                3 -> docName ="third"
+                4 -> docName = "forth"
+                5 -> docName = "fifth"
+            }
+            db.collection("meditation").document("first").collection("sounds")
+                .document(docName).update("tried", true)
+        } catch (e: Exception) {
+            Log.e(TAG , "Error updating count" , e)
+            FirebaseCrashlytics.getInstance().log("Error updating count")
+            FirebaseCrashlytics.getInstance().recordException(e)
+        }
+    }
 }

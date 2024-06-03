@@ -32,14 +32,15 @@
         android:layout_marginStart="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_24">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/ic_baby"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baby"/>
 
         <TextView
             android:id="@+id/name"

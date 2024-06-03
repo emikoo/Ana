@@ -1,4 +1,4 @@
-package com.example.ana.presentation.ui.fragments.main.home.child
+package com.example.ana.presentation.ui.fragments.main.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +34,7 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
             callFromChildDetailFragment()
         }
         else {
-            viewModel.getArticlesByCategory(arguments.categoryName)
+            viewModel.getArticlesByCategory(prefs.getSettingsLanguage(), arguments.categoryName)
             callFromHomeFragment()
         }
     }
@@ -43,7 +43,7 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
         binding.btnBack.setOnClickListener {
             findNavController().navigate(
                 ArticleFragmentDirections.actionArticleFragmentToChildDetailFragment(
-                    arguments.childName
+                    arguments.childName, ""
                 )
             )
         }
@@ -64,7 +64,7 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
                 binding.ageOfChild.ageOfChild(it)
                 viewModel.getArticlesByCategoryAndChildBirthdate(arguments.categoryName, it)
             } else {
-                viewModel.getArticlesByCategory(arguments.categoryName)
+                viewModel.getArticlesByCategory(prefs.getSettingsLanguage(), arguments.categoryName)
             }
         }
         viewModel.articlesByChild.observe(viewLifecycleOwner) {
