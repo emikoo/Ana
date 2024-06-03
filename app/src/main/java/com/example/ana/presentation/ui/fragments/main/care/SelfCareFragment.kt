@@ -29,6 +29,9 @@ class SelfCareFragment : BaseFragment<FragmentSelfCareBinding>(), CareSelector {
         binding.premiumView.setOnClickListener {
             Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
         }
+        binding.subscribe.setOnClickListener {
+            Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun subscribeToLiveData() {
