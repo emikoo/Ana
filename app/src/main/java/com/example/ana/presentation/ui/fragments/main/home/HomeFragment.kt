@@ -1,5 +1,6 @@
 package com.example.ana.presentation.ui.fragments.main.home
 
+import GridSpacingItemDecoration
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
     private lateinit var adviceAdapter: AdviceAdapter
     private lateinit var children: MutableList<Child>
     private lateinit var articles: MutableList<Advice>
+
     override fun attachBinding(
         list: MutableList<FragmentHomeBinding>,
         layoutInflater: LayoutInflater,
@@ -57,8 +60,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
 
     private fun setupArticles() {
         viewModel.getAdvices(prefs.getSettingsLanguage())
-        binding.listArticles.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.listArticles.layoutManager = layoutManager
+        val spacing = resources.getDimensionPixelSize(R.dimen.dp_8) // Adjust spacing as needed
+        val includeEdge = true
+        binding.listArticles.addItemDecoration(GridSpacingItemDecoration(2, spacing, includeEdge))
     }
 
     private fun openWhatsApp() {

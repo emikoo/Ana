@@ -36,7 +36,7 @@ class AdviceAdapter(private val articles: MutableList<Advice>, val selector: Adv
         @SuppressLint("SetTextI18n")
         fun bind(advice: Advice) {
             title.text = advice.title
-            ageDate.text = advice.ageWeeks.toString() + itemView.context.getString(R.string.weeks) + advice.created
+            ageDate.text = advice.created
             category.text = advice.category
             Glide.with(image)
                 .load(advice.picture)
