@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.fragments.noconnection.NoConnectionFragment">
+
+    <ImageView
+        android:layout_width="@dimen/dp_250"
+        android:layout_height="@dimen/dp_250"
+        android:background="@drawable/ic_wifi_off" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/no_internet_connection" />
+
+    <Button
+        android:id="@+id/btn_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_32"
+        android:textAllCaps="false"
+        android:text="@string/retry"/>
+
+</LinearLayout>

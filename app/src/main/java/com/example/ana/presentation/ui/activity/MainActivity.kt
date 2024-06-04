@@ -52,6 +52,12 @@ class MainActivity : AppCompatActivity() {
         navController.graph = navGraph
     }
     private fun noConnection() {
-        Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        navGraph.setStartDestination(R.id.noConnectionFlowFragment)
+        navController.graph = navGraph
     }
 }

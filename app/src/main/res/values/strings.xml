@@ -92,6 +92,7 @@
     <string name="year">" year"</string>
     <string name="month">" month"</string>
     <string name="days">" days"</string>
+    <string name="retry">Retry</string>
     <string-array name="languages">
         <item>English</item>
         <item>Қазақ</item>

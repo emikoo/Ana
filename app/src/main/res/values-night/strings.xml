@@ -6,4 +6,5 @@
     <string name="year">" year"</string>
     <string name="month">" month"</string>
     <string name="days">" days"</string>
+    <string name="retry">Retry</string>
 </resources>
