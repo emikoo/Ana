@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.ana.data.model.Advice
 import com.example.ana.data.model.Child
 import com.example.ana.data.model.User
-import com.example.ana.service.FirebaseAdviceService
 import com.example.ana.service.FirebaseHomeService
 import kotlinx.coroutines.launch
 
-class HomeViewModel(): ViewModel() {
+class HomeViewModel() : ViewModel() {
     private val _children = MutableLiveData<List<Child>>()
     val children: LiveData<List<Child>> = _children
     private val _name = MutableLiveData<String>()

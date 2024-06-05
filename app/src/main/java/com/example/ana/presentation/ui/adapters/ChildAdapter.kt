@@ -10,14 +10,13 @@ import com.example.ana.R
 import com.example.ana.data.model.Child
 import com.example.ana.presentation.extensions.ageOfChild
 import de.hdodenhof.circleimageview.CircleImageView
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
 
 interface ChildSelector {
     fun onChildPressed(child: Child)
 }
-class ChildAdapter(private val children: MutableList<Child>, val selector: ChildSelector) : RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
+
+class ChildAdapter(private val children: MutableList<Child>, val selector: ChildSelector) :
+    RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_child, parent, false)

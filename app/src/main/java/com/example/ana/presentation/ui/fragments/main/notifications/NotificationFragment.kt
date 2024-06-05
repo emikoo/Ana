@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ana.databinding.FragmentNotificationBinding
-import com.example.ana.presentation.ui.adapters.ArticleAdapter
 import com.example.ana.presentation.ui.adapters.NotificationAdapter
 import com.example.ana.view_model.NotificationViewModel
 import com.teenteen.teencash.presentation.base.BaseFragment
@@ -27,7 +26,8 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
         viewModel.notifications.observe(viewLifecycleOwner) {
             adapter = NotificationAdapter(it.toMutableList())
             binding.recyclerView.adapter = adapter
-            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            binding.recyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
     }
 

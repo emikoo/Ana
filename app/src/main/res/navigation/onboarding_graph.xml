@@ -9,7 +9,7 @@
         android:id="@+id/onBoardingFragment"
         android:name="com.example.ana.presentation.ui.fragments.onboarding.OnBoardingFragment"
         android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding" >
+        tools:layout="@layout/fragment_onboarding">
         <action
             android:id="@+id/action_onBoardingFragment_self"
             app:destination="@id/onBoardingFragment" />

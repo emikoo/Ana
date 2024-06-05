@@ -52,7 +52,7 @@
         android:layout_marginEnd="@dimen/dp_16"
         android:backgroundTint="#80493A97"
         style="@style/ButtonText"
-        android:text="@string/subscribe"/>
+        android:text="@string/subscribe" />
 
     <View
         android:id="@+id/premium_view"
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_16"
-        android:layout_marginBottom="@dimen/dp_16"/>
+        android:layout_marginBottom="@dimen/dp_16" />
 
     <TextView
         android:id="@+id/premium_title"
@@ -75,7 +75,7 @@
         android:textSize="20sp"
         android:fontFamily="@font/sf_pro_display_medium"
         android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginStart="@dimen/dp_24"/>
+        android:layout_marginStart="@dimen/dp_24" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toTopOf="@id/premium_title"
         app:layout_constraintBottom_toBottomOf="@id/premium_title"
         android:layout_marginStart="@dimen/dp_4"
-        android:background="@drawable/ic_crown"/>
+        android:background="@drawable/ic_crown" />
 
     <TextView
         android:id="@+id/premium_subtitle"
@@ -100,5 +100,5 @@
         android:textColor="@color/white"
         android:textSize="13sp"
         android:layout_marginEnd="@dimen/dp_16"
-        android:fontFamily="@font/sf_pro_display_regular"/>
+        android:fontFamily="@font/sf_pro_display_regular" />
 </androidx.constraintlayout.widget.ConstraintLayout>

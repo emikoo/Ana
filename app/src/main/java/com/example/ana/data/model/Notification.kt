@@ -3,7 +3,6 @@ package com.example.ana.data.model
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentSnapshot
-import java.lang.Exception
 
 data class Notification(
     val title: String,
@@ -18,13 +17,14 @@ data class Notification(
                 val picture = getString("picture").toString()
                 Notification(title, subtitle, picture)
             } catch (e: Exception) {
-                Log.e(TAG , "Error converting Notification" , e)
+                Log.e(TAG, "Error converting Notification", e)
                 FirebaseCrashlytics.getInstance().log("Error converting Notification")
                 FirebaseCrashlytics.getInstance().setCustomKey("id", id)
                 FirebaseCrashlytics.getInstance().recordException(e)
                 null
             }
         }
+
         private const val TAG = "Notification"
     }
 }

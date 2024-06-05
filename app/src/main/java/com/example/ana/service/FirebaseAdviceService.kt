@@ -8,9 +8,6 @@ import com.example.ana.presentation.extensions.calculateWeeksLived
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 
 object FirebaseAdviceService {
     private const val TAG = "FirebaseAdviceService"
@@ -25,9 +22,9 @@ object FirebaseAdviceService {
                 .collection("children").document(childName).get().await().get("birthday").toString()
             child
         } catch (e: Exception) {
-            Log.e(TAG, "Error getting getAgeOfChild" , e)
+            Log.e(TAG, "Error getting getAgeOfChild", e)
             FirebaseCrashlytics.getInstance().log("Error getting getAgeOfChild")
-            FirebaseCrashlytics.getInstance().setCustomKey("uid" , userId)
+            FirebaseCrashlytics.getInstance().setCustomKey("uid", userId)
             FirebaseCrashlytics.getInstance().recordException(e)
             ""
         }
@@ -49,7 +46,10 @@ object FirebaseAdviceService {
         }
     }
 
-    suspend fun getArticlesByCategoryAndChildBirthdate(categoryName: String, birthdate: String): List<Advice> {
+    suspend fun getArticlesByCategoryAndChildBirthdate(
+        categoryName: String,
+        birthdate: String
+    ): List<Advice> {
         return try {
             val articles = db.collection("advices")
                 .whereEqualTo("category", categoryName)

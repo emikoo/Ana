@@ -2,7 +2,10 @@ package com.example.ana.presentation.extensions
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Rect
+import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.preference.PreferenceManager
 import com.example.ana.R
@@ -51,4 +54,12 @@ fun TextView.ageOfChild(birthdate: String) {
     val month = birthday.months.toString() + context.getString(R.string.month)
     val days = birthday.days.toString() + context.getString(R.string.days)
     this.text = "$year $month $days"
+}
+fun Fragment.isKeyboardVisible(): Boolean {
+    val rootView: View = requireActivity().findViewById(android.R.id.content)
+    val rect = Rect()
+    rootView.getWindowVisibleDisplayFrame(rect)
+    val screenHeight = rootView.height
+    val keypadHeight = screenHeight - rect.bottom
+    return keypadHeight > screenHeight * 0.15
 }

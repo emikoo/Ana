@@ -16,17 +16,19 @@ import com.example.ana.R
 import com.example.ana.data.model.Advice
 import com.example.ana.data.model.Child
 import com.example.ana.databinding.FragmentHomeBinding
-import com.example.ana.presentation.ui.adapters.ChildAdapter
 import com.example.ana.presentation.ui.adapters.AdviceAdapter
 import com.example.ana.presentation.ui.adapters.AdviceSelector
+import com.example.ana.presentation.ui.adapters.ChildAdapter
 import com.example.ana.presentation.ui.adapters.ChildSelector
 import com.example.ana.presentation.ui.fragments.main.home.child.ChildAuthBottomSheet
 import com.example.ana.presentation.ui.fragments.main.home.child.UpdateData
 import com.example.ana.presentation.utills.ItemSimpleTouch
+import com.example.ana.presentation.utills.showActionSnackbar
 import com.example.ana.view_model.HomeViewModel
 import com.teenteen.teencash.presentation.base.BaseFragment
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSelector, ChildSelector {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSelector,
+    ChildSelector {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var childAdapter: ChildAdapter
@@ -61,7 +63,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
         viewModel.getAdvices(prefs.getSettingsLanguage())
         val layoutManager = GridLayoutManager(requireContext(), 2)
         binding.listArticles.layoutManager = layoutManager
-        val spacing = resources.getDimensionPixelSize(R.dimen.dp_8) // Adjust spacing as needed
+        val spacing = resources.getDimensionPixelSize(R.dimen.dp_8)
         val includeEdge = true
         binding.listArticles.addItemDecoration(GridSpacingItemDecoration(2, spacing, includeEdge))
     }
@@ -133,19 +135,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), UpdateData, AdviceSele
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
                 val child = children[position]
-                viewModel.deleteChild(prefs.getCurrentUserId(), child.name)
-                childAdapter.deleteChild(position)
+
+                showActionSnackbar(
+                    binding.rvChildren,
+                    getString(R.string.are_you_sure_you_want_to_delete) + " ${child.name}?",
+                    getString(R.string.delete),
+                    { deleteChild(child, position) },
+                    requireContext(),
+                    { childAdapter.notifyItemChanged(position) } // Cancel action
+                )
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.rvChildren)
     }
 
+    private fun deleteChild(child: Child, position: Int) {
+        viewModel.deleteChild(prefs.getCurrentUserId(), child.name)
+        childAdapter.deleteChild(position)
+    }
+
     override fun onAdvicePressed(advice: Advice) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(advice.category, ""))
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToArticleFragment(
+                advice.category,
+                ""
+            )
+        )
     }
 
     override fun onChildPressed(child: Child) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChildDetailFragment(child.name, child.image.toString()))
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToChildDetailFragment(
+                child.name,
+                child.image.toString()
+            )
+        )
     }
 }

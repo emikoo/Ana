@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -59,7 +58,9 @@ class WishCardAdapter(
                     icon.visibility = View.VISIBLE
                     placeholder.visibility = View.GONE
                     image.visibility = View.GONE
+                    icon.setImageResource(R.drawable.ic_add_circle)
                 }
+
                 ITEM_SECTION -> {
                     name.visibility = View.GONE
                     icon.visibility = View.GONE
@@ -71,9 +72,11 @@ class WishCardAdapter(
                         placeholder.visibility = View.GONE
                         Glide.with(image)
                             .load(sector.image)
+                            .placeholder(R.drawable.ic_logo)
                             .into(image)
                     }
                 }
+
                 GALLERY_SECTION -> {
                     name.visibility = View.GONE
                     icon.visibility = View.GONE

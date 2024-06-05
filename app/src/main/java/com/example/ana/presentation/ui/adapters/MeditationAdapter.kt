@@ -15,8 +15,10 @@ interface MeditationInterface {
     fun onUnlockedSelected(meditation: Meditation)
 }
 
-class MeditationAdapter(private val meditation: MutableList<Meditation>,
-                        private val selector: MeditationInterface) :
+class MeditationAdapter(
+    private val meditation: MutableList<Meditation>,
+    private val selector: MeditationInterface
+) :
     RecyclerView.Adapter<MeditationAdapter.MeditationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeditationViewHolder {
@@ -43,7 +45,8 @@ class MeditationAdapter(private val meditation: MutableList<Meditation>,
 
         fun bind(meditation: Meditation) {
             name.text = meditation.name
-            total_sessions.text = meditation.sessions.toString() + itemView.context.getString(R.string.sessions)
+            total_sessions.text =
+                meditation.sessions.toString() + itemView.context.getString(R.string.sessions)
             sessions.text = "${meditation.count}/${meditation.sessions}"
             if (!meditation.locked) lock.visibility = View.GONE
             else lock.visibility = View.VISIBLE

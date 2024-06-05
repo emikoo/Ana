@@ -37,7 +37,7 @@
         android:textColor="@color/purple"
         app:layout_constraintTop_toTopOf="@id/back"
         app:layout_constraintBottom_toBottomOf="@id/back"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:datePickerMode="spinner"
-            android:calendarViewShown="false"/>
+            android:calendarViewShown="false" />
 
         <ImageView
             android:id="@+id/image"

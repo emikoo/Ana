@@ -13,7 +13,6 @@ import com.example.ana.R
 import com.example.ana.data.local.PrefsSettings
 import com.example.ana.presentation.utills.ProgressDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -28,25 +27,25 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
     lateinit var progressDialog: Dialog
 
     override fun onCreateView(
-        inflater: LayoutInflater ,
-        container: ViewGroup? ,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = getInflatedView(inflater , container , false)
+    ) = getInflatedView(inflater, container, false)
 
     private fun getInflatedView(
-        inflater: LayoutInflater ,
-        container: ViewGroup? ,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         attachToRoot: Boolean
     ): View {
         val tempList = mutableListOf<VB_CHILD>()
-        attachBinding(tempList , inflater , container , attachToRoot)
+        attachBinding(tempList, inflater, container, attachToRoot)
         this._binding = tempList[0]
         binding = _binding as VB_CHILD
         return binding.root
     }
 
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
-        super.onViewCreated(view , savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
         setupViews()
         subscribeToLiveData()
@@ -71,9 +70,9 @@ abstract class BaseFragment<VB_CHILD : ViewBinding> : Fragment() {
     }
 
     abstract fun attachBinding(
-        list: MutableList<VB_CHILD> ,
-        layoutInflater: LayoutInflater ,
-        container: ViewGroup? ,
+        list: MutableList<VB_CHILD>,
+        layoutInflater: LayoutInflater,
+        container: ViewGroup?,
         attachToRoot: Boolean
     )
 }

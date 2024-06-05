@@ -1,7 +1,6 @@
 package com.example.ana.presentation.ui.fragments.main.care.podcast
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -36,9 +35,10 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
         podcastList = mutableListOf()
         adapter = PodcastAdapter(podcastList, this)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager =
+            GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
         viewModel.getItemPodcast(arguments.itemId)
-        viewModel.getPodcastExceptItem(arguments.itemId+1)
+        viewModel.getPodcastExceptItem(arguments.itemId + 1)
         binding.btnBack.setOnClickListener {
             findNavController().navigate(ItemPodcastFragmentDirections.actionItemPodcastFragment2ToPodcastFragment())
         }
@@ -54,7 +54,7 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
                 .placeholder(R.drawable.ic_logo)
                 .into(binding.preview)
             binding.author.text = podcast.author
-            viewModel.updateViews(podcast.id, podcast.views+1)
+            viewModel.updateViews(podcast.id, podcast.views + 1)
             binding.views.text = "${podcast.views} " + getString(R.string.views)
             progressDialog.dismiss()
             showVideo(podcast.url)
@@ -78,7 +78,7 @@ class ItemPodcastFragment : BaseFragment<FragmentItemPodcastBinding>(), PodcastI
 
     override fun onPodcastSelected(podcast: Podcast) {
         progressDialog.show()
-        viewModel.getItemPodcast(podcast.id-1)
+        viewModel.getItemPodcast(podcast.id - 1)
         viewModel.getPodcastExceptItem(podcast.id)
         binding.play.visibility = View.VISIBLE
         binding.preview.visibility = View.VISIBLE

@@ -52,7 +52,8 @@ class PodcastFragment : BaseFragment<FragmentPodcastBinding>(), PodcastInterface
     }
 
     override fun onPodcastSelected(podcast: Podcast) {
-        val directions = PodcastFragmentDirections.actionPodcastFragmentToItemPodcastFragment2(podcast.id - 1)
+        val directions =
+            PodcastFragmentDirections.actionPodcastFragmentToItemPodcastFragment2(podcast.id - 1)
         findNavController().navigate(directions)
     }
 }

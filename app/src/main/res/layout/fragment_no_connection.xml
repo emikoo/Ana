@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".presentation.ui.fragments.noconnection.NoConnectionFragment">
+    tools:context=".presentation.ui.fragments.no_connection.NoConnectionFragment">
 
     <ImageView
         android:layout_width="@dimen/dp_250"
@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_32"
         android:textAllCaps="false"
-        android:text="@string/retry"/>
+        android:text="@string/retry" />
 
 </LinearLayout>

@@ -20,12 +20,12 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     private lateinit var layouts: Array<Int>
 
     override fun attachBinding(
-        list: MutableList<FragmentOnboardingBinding> ,
-        layoutInflater: LayoutInflater ,
-        container: ViewGroup? ,
+        list: MutableList<FragmentOnboardingBinding>,
+        layoutInflater: LayoutInflater,
+        container: ViewGroup?,
         attachToRoot: Boolean
     ) {
-        list.add(FragmentOnboardingBinding.inflate(layoutInflater , container , attachToRoot))
+        list.add(FragmentOnboardingBinding.inflate(layoutInflater, container, attachToRoot))
     }
 
     override fun setupViews() {
@@ -36,11 +36,11 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     private fun init() {
         layouts = arrayOf(
-            R.layout.onboarding_slide1 ,
-            R.layout.onboarding_slide2 ,
+            R.layout.onboarding_slide1,
+            R.layout.onboarding_slide2,
             R.layout.onboarding_slide3
         )
-        sliderAdapter = SliderAdapter(requireActivity() , layouts)
+        sliderAdapter = SliderAdapter(requireActivity(), layouts)
     }
 
     private fun dataSet() {
@@ -60,8 +60,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
         override fun onPageScrollStateChanged(state: Int) {}
         override fun onPageScrolled(
-            position: Int ,
-            positionOffset: Float ,
+            position: Int,
+            positionOffset: Float,
             positionOffsetPixels: Int
         ) {
         }
@@ -70,22 +70,22 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     private fun addBottomDots(currentPage: Int) {
         dots = arrayOfNulls(layouts.size)
         binding.dotsLayout.removeAllViews()
-        for (i in 0 until dots !!.size) {
-            dots !![i] = TextView(requireActivity())
-            dots !![i]?.text = Html.fromHtml("&#8226;")
-            dots !![i]?.textSize = 35f
-            dots !![i]?.setTextColor(resources.getColor(R.color.dots_grey))
-            binding.dotsLayout.addView(dots !![i])
+        for (i in 0 until dots!!.size) {
+            dots!![i] = TextView(requireActivity())
+            dots!![i]?.text = Html.fromHtml("&#8226;")
+            dots!![i]?.textSize = 35f
+            dots!![i]?.setTextColor(resources.getColor(R.color.dots_grey))
+            binding.dotsLayout.addView(dots!![i])
         }
 
-        if (dots !!.isNotEmpty()) {
-            dots !![currentPage]?.setTextColor(resources.getColor(R.color.purple))
+        if (dots!!.isNotEmpty()) {
+            dots!![currentPage]?.setTextColor(resources.getColor(R.color.purple))
         }
     }
 
     private fun interactions() {
         binding.button1.setOnClickListener {
-            val current = getCurrentScreen(+ 1)
+            val current = getCurrentScreen(+1)
             if (current < layouts.size) {
                 binding.slider.currentItem = current
             } else {

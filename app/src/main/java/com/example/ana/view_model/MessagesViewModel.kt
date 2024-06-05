@@ -10,7 +10,7 @@ import com.example.ana.service.FirebaseMessagesService
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
-class MessagesViewModel: ViewModel() {
+class MessagesViewModel : ViewModel() {
     private val _messages = MutableLiveData<List<ChatMessage>>()
     val messages: LiveData<List<ChatMessage>> = _messages
     private val _lastMessage = MutableLiveData<ChatMessage?>()
@@ -22,7 +22,7 @@ class MessagesViewModel: ViewModel() {
         }
     }
 
-    fun sendMessage(uid: String, message: String){
+    fun sendMessage(uid: String, message: String) {
         viewModelScope.launch {
             FirebaseMessagesService.sendMessage(uid, message)
         }
@@ -34,7 +34,6 @@ class MessagesViewModel: ViewModel() {
             .document(userId)
             .collection("messages")
 
-        // Query messages with the specific prompt
         messagesRef
             .whereEqualTo("prompt", prompt)
             .addSnapshotListener { snapshots, e ->

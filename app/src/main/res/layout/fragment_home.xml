@@ -100,7 +100,7 @@
                 android:text="@string/add_baby"
                 android:fontFamily="@font/sf_pro_display_medium"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/rv_children"/>
+                app:layout_constraintEnd_toEndOf="@id/rv_children" />
 
             <ImageButton
                 android:id="@+id/btn_add_baby"
@@ -110,7 +110,7 @@
                 android:background="@drawable/ic_add_circle"
                 app:layout_constraintBottom_toBottomOf="@id/add_baby_title"
                 app:layout_constraintTop_toTopOf="@id/add_baby_title"
-                app:layout_constraintEnd_toStartOf="@id/add_baby_title"/>
+                app:layout_constraintEnd_toStartOf="@id/add_baby_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_children"
@@ -122,7 +122,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginBottom="@dimen/dp_8"/>
+                android:layout_marginBottom="@dimen/dp_8" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,7 +140,7 @@
             <ImageView
                 android:layout_width="@dimen/dp_24"
                 android:layout_height="@dimen/dp_24"
-                android:background="@drawable/ic_call"/>
+                android:background="@drawable/ic_call" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                 android:textSize="@dimen/sp_15"
                 android:textColor="@color/white"
                 android:fontFamily="@font/sf_pro_text_medium"
-                android:layout_marginStart="@dimen/dp_8"/>
+                android:layout_marginStart="@dimen/dp_8" />
         </LinearLayout>
 
         <TextView
@@ -161,7 +161,7 @@
             android:fontFamily="@font/sf_pro_text_medium"
             android:text="@string/individual_advices"
             android:textColor="@color/dark"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_articles"

@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/ic_play"/>
+        android:background="@drawable/ic_play" />
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -28,6 +28,6 @@
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginStart="@dimen/dp_16"
         android:background="@drawable/ic_back"
-        android:backgroundTint="#F7F7F7"/>
+        android:backgroundTint="#F7F7F7" />
 
 </RelativeLayout>

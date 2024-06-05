@@ -20,15 +20,31 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
         return when (messages[position].type) {
             MessageType.USER -> ViewType.USER_MESSAGE.ordinal
             MessageType.BOT -> ViewType.BOT_MESSAGE.ordinal
-            else -> { ViewType.USER_MESSAGE.ordinal }
+            else -> {
+                ViewType.USER_MESSAGE.ordinal
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when(viewType) {
-            ViewType.USER_MESSAGE.ordinal -> UserMessageViewHolder(inflater.inflate(R.layout.message_item_user, parent, false))
-            ViewType.BOT_MESSAGE.ordinal -> BotMessageViewHolder(inflater.inflate(R.layout.message_item_bot, parent, false))
+        return when (viewType) {
+            ViewType.USER_MESSAGE.ordinal -> UserMessageViewHolder(
+                inflater.inflate(
+                    R.layout.message_item_user,
+                    parent,
+                    false
+                )
+            )
+
+            ViewType.BOT_MESSAGE.ordinal -> BotMessageViewHolder(
+                inflater.inflate(
+                    R.layout.message_item_bot,
+                    parent,
+                    false
+                )
+            )
+
             else -> throw IllegalArgumentException("Unsupported view type")
         }
     }
@@ -64,7 +80,8 @@ class MessageAdapter(private val messages: MutableList<ChatMessage>) :
         private val timeTextView: TextView = itemView.findViewById(R.id.textTime)
 
         fun bind(message: ChatMessage) {
-            if (message.response.trim().isBlank()) messageTextView.text = itemView.context.getString(R.string.typing)
+            if (message.response.trim().isBlank()) messageTextView.text =
+                itemView.context.getString(R.string.typing)
             else messageTextView.text = message.response
             timeTextView.text = message.timestampShort
         }

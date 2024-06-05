@@ -14,10 +14,10 @@ class ProgressDialog {
         fun progressDialog(context: Context): Dialog {
             val dialog = Dialog(context)
             val inflate =
-                LayoutInflater.from(context).inflate(R.layout.progress_dialog , null)
+                LayoutInflater.from(context).inflate(R.layout.progress_dialog, null)
             dialog.setContentView(inflate)
             dialog.setCancelable(false)
-            dialog.window !!.setBackgroundDrawable(
+            dialog.window!!.setBackgroundDrawable(
                 ColorDrawable(Color.TRANSPARENT)
             )
             return dialog
@@ -25,7 +25,11 @@ class ProgressDialog {
     }
 }
 
-fun checkInternetConnection(connectedAction: () -> Unit , context: Context , noInternetAction: () -> Unit) {
+fun checkInternetConnection(
+    connectedAction: () -> Unit,
+    context: Context,
+    noInternetAction: () -> Unit
+) {
     if (internetIsConnected(context)) {
         connectedAction()
     } else {

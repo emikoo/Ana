@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.ana.data.model.Meditation
 import com.example.ana.data.model.Podcast
 import com.example.ana.data.model.SoundSession
-import com.example.ana.data.model.WishCard
 import com.example.ana.service.FirebaseCareService
 import kotlinx.coroutines.launch
 

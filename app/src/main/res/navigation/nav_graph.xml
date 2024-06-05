@@ -28,8 +28,8 @@
         android:label="flow_fragment_auth"
         tools:layout="@layout/flow_fragment_auth" />
     <fragment
-        android:id="@+id/noConnectionFlowFragment"
-        android:name="com.example.ana.presentation.ui.fragments.noconnection.NoConnectionFlowFragment"
+        android:id="@+id/noConnectionFlowFragmentt"
+        android:name="com.example.ana.presentation.ui.fragments.no_connection.NoConnectionFlowFragment"
         android:label="flow_fragment_noconnection"
         tools:layout="@layout/flow_fragment_noconnection" />
 </navigation>

@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/meditation"/>
+            android:text="@string/meditation" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
@@ -49,7 +49,7 @@
             android:id="@+id/preview"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/lock"
@@ -64,7 +64,7 @@
             android:visibility="gone"
             android:layout_marginTop="@dimen/dp_16"
             app:layout_constraintStart_toStartOf="@id/card"
-            app:layout_constraintBottom_toBottomOf="@id/card"/>
+            app:layout_constraintBottom_toBottomOf="@id/card" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:paddingEnd="@dimen/dp_16"
                 android:paddingTop="@dimen/dp_4"
                 android:paddingBottom="@dimen/dp_4"
-                android:layout_margin="@dimen/dp_8"/>
+                android:layout_margin="@dimen/dp_8" />
 
             <TextView
                 android:id="@+id/sessions"
@@ -96,7 +96,7 @@
                 android:paddingEnd="@dimen/dp_12"
                 android:paddingTop="@dimen/dp_4"
                 android:paddingBottom="@dimen/dp_4"
-                android:layout_margin="@dimen/dp_8"/>
+                android:layout_margin="@dimen/dp_8" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -109,7 +109,7 @@
         android:text="@string/savor_the_moment"
         app:layout_constraintTop_toBottomOf="@id/card"
         app:layout_constraintStart_toStartOf="@id/card"
-        app:layout_constraintEnd_toEndOf="@id/card"/>
+        app:layout_constraintEnd_toEndOf="@id/card" />
 
     <ImageView
         android:id="@+id/time"
@@ -118,7 +118,7 @@
         android:layout_marginStart="@dimen/dp_16"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/ic_time"/>
+        android:background="@drawable/ic_time" />
 
     <TextView
         android:layout_width="0dp"
@@ -132,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@id/card"
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintStart_toEndOf="@id/time"
-        app:layout_constraintEnd_toEndOf="@id/name"/>
+        app:layout_constraintEnd_toEndOf="@id/name" />
 
     <TextView
         android:id="@+id/text"
@@ -145,7 +145,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginStart="@dimen/dp_16"
         app:layout_constraintTop_toBottomOf="@id/time"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/description"
@@ -158,7 +158,7 @@
         android:layout_marginStart="@dimen/dp_16"
         app:layout_constraintTop_toBottomOf="@id/text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/name"/>
+        app:layout_constraintEnd_toEndOf="@id/name" />
 
     <TextView
         android:id="@+id/read_more"
@@ -170,7 +170,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:background="@android:color/transparent"
         android:text="@string/read_more"
-        android:textColor="@color/purple"/>
+        android:textColor="@color/purple" />
 
     <View
         android:layout_width="0dp"
@@ -178,7 +178,7 @@
         app:layout_constraintBottom_toBottomOf="@id/read_more"
         app:layout_constraintStart_toStartOf="@id/read_more"
         app:layout_constraintEnd_toEndOf="@id/read_more"
-        android:background="@color/purple"/>
+        android:background="@color/purple" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -189,5 +189,5 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/read_more"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

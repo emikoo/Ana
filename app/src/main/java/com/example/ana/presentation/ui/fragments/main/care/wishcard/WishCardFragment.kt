@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -119,7 +118,9 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
         tabLayout.setBackgroundColor(Color.parseColor("#F0EDFF"))
         tabLayout.removeAllTabs()
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.album))))
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.download))))
+        tabLayout.addTab(
+            tabLayout.newTab().setCustomView(createTabView(getString(R.string.download)))
+        )
         tabLayout.getTabAt(0)?.select()
         setSelectedTab(tabLayout.getTabAt(0))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -127,7 +128,11 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
                 setSelectedTab(tab)
                 if (tab.position == 1) openGalleryForImage()
             }
-            override fun onTabUnselected(tab: TabLayout.Tab) { setUnselectedTab(tab) }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                setUnselectedTab(tab)
+            }
+
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
@@ -163,7 +168,12 @@ class WishCardFragment : BaseFragment<FragmentWishCardBinding>(),
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == RESULT_GALLERY) {
             val imageUri = data?.data
-            viewModel.uploadPicture(prefs.getCurrentUserId(), sectionName, imageId, imageUri.toString())
+            viewModel.uploadPicture(
+                prefs.getCurrentUserId(),
+                sectionName,
+                imageId,
+                imageUri.toString()
+            )
             viewModel.getSectionItems(prefs.getCurrentUserId(), sectionName)
             setupItemSection()
         } else binding.tab.getTabAt(0)?.select()

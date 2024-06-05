@@ -14,7 +14,9 @@ import com.example.ana.data.model.Advice
 interface AdviceSelector {
     fun onAdvicePressed(advice: Advice)
 }
-class AdviceAdapter(private val articles: MutableList<Advice>, val selector: AdviceSelector) : RecyclerView.Adapter<AdviceAdapter.AdviceViewHolder>() {
+
+class AdviceAdapter(private val articles: MutableList<Advice>, val selector: AdviceSelector) :
+    RecyclerView.Adapter<AdviceAdapter.AdviceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdviceViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_advice, parent, false)
@@ -33,6 +35,7 @@ class AdviceAdapter(private val articles: MutableList<Advice>, val selector: Adv
         private val ageDate: TextView = itemView.findViewById(R.id.age_date)
         private val category: TextView = itemView.findViewById(R.id.category)
         private val image: ImageView = itemView.findViewById(R.id.image)
+
         @SuppressLint("SetTextI18n")
         fun bind(advice: Advice) {
             title.text = advice.title

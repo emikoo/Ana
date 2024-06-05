@@ -32,8 +32,7 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
         if (arguments.childName != "") {
             viewModel.getAgeOfChild(prefs.getCurrentUserId(), arguments.childName)
             callFromChildDetailFragment()
-        }
-        else {
+        } else {
             viewModel.getArticlesByCategory(prefs.getSettingsLanguage(), arguments.categoryName)
             callFromHomeFragment()
         }
@@ -71,7 +70,7 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
             adapter = ArticleAdapter(it.toMutableList())
             binding.articlesList.adapter = adapter
             binding.articlesList.layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
         viewModel.articles.observe(viewLifecycleOwner) {
             adapter = ArticleAdapter(it.toMutableList())

@@ -12,6 +12,7 @@ import kotlinx.coroutines.tasks.await
 
 object FirebaseMessagesService {
     private const val TAG = "FirebaseChatService"
+
     @SuppressLint("StaticFieldLeak")
     private val db = FirebaseFirestore.getInstance()
 
@@ -23,9 +24,9 @@ object FirebaseMessagesService {
             array.get().await()
                 .documents.mapNotNull { it.toMessage() }
         } catch (e: Exception) {
-            Log.e(TAG , "Error getting messages" , e)
+            Log.e(TAG, "Error getting messages", e)
             FirebaseCrashlytics.getInstance().log("Error getting messages")
-            FirebaseCrashlytics.getInstance().setCustomKey("senderId" , userId)
+            FirebaseCrashlytics.getInstance().setCustomKey("senderId", userId)
             FirebaseCrashlytics.getInstance().recordException(e)
             emptyList()
         }
@@ -43,9 +44,9 @@ object FirebaseMessagesService {
                 .document(userId)
                 .collection("messages").add(messageMap)
         } catch (e: Exception) {
-            Log.e(TAG , "Error sending message" , e)
+            Log.e(TAG, "Error sending message", e)
             FirebaseCrashlytics.getInstance().log("Error sending message")
-            FirebaseCrashlytics.getInstance().setCustomKey("user id" , userId)
+            FirebaseCrashlytics.getInstance().setCustomKey("user id", userId)
             FirebaseCrashlytics.getInstance().recordException(e)
         }
     }

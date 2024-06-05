@@ -72,7 +72,8 @@ object FirebaseCareService {
 
     suspend fun getItemPodcast(itemId: Int): Podcast? {
         return try {
-            val podcast = db.collection("podcasts").orderBy("id").get().await().documents[itemId].toPodcast()
+            val podcast =
+                db.collection("podcasts").orderBy("id").get().await().documents[itemId].toPodcast()
             podcast
         } catch (e: Exception) {
             Log.e(TAG, "Error getting podcast", e)
@@ -98,9 +99,9 @@ object FirebaseCareService {
         try {
             db.collection("podcasts").document("nuradam$podcastId").update("views", views)
         } catch (e: Exception) {
-            Log.e(TAG , "Error updating views" , e)
+            Log.e(TAG, "Error updating views", e)
             FirebaseCrashlytics.getInstance().log("Error updating views")
-            FirebaseCrashlytics.getInstance().setCustomKey("user id" , podcastId)
+            FirebaseCrashlytics.getInstance().setCustomKey("user id", podcastId)
             FirebaseCrashlytics.getInstance().recordException(e)
         }
     }
@@ -109,7 +110,7 @@ object FirebaseCareService {
         try {
             db.collection("meditation").document("first").update("count", count)
         } catch (e: Exception) {
-            Log.e(TAG , "Error updating count" , e)
+            Log.e(TAG, "Error updating count", e)
             FirebaseCrashlytics.getInstance().log("Error updating count")
             FirebaseCrashlytics.getInstance().recordException(e)
         }
@@ -121,14 +122,14 @@ object FirebaseCareService {
             when (id) {
                 1 -> docName = "first"
                 2 -> docName = "second"
-                3 -> docName ="third"
+                3 -> docName = "third"
                 4 -> docName = "forth"
                 5 -> docName = "fifth"
             }
             db.collection("meditation").document("first").collection("sounds")
                 .document(docName).update("tried", true)
         } catch (e: Exception) {
-            Log.e(TAG , "Error updating count" , e)
+            Log.e(TAG, "Error updating count", e)
             FirebaseCrashlytics.getInstance().log("Error updating count")
             FirebaseCrashlytics.getInstance().recordException(e)
         }

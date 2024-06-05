@@ -14,7 +14,10 @@ interface PodcastInterface {
     fun onPodcastSelected(podcast: Podcast)
 }
 
-class PodcastAdapter(private val podcast: MutableList<Podcast>, private val selector: PodcastInterface) :
+class PodcastAdapter(
+    private val podcast: MutableList<Podcast>,
+    private val selector: PodcastInterface
+) :
     RecyclerView.Adapter<PodcastAdapter.PodcastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastViewHolder {

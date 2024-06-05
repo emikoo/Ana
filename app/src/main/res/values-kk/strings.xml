@@ -44,7 +44,7 @@
     <string name="hello_i_need_assistance">Сәлем, маған көмек қажет.</string>
     <string name="individual_advices">Жеке кеңестер</string>
     <string name="sleep">Ұйқы</string>
-    <string name="food">Тамақ</string>
+    <string name="food">Тамақтану</string>
     <string name="physical_activity">Белсенділік</string>
     <string name="mental_activity">Даму</string>
     <string name="read">Оқу</string>
@@ -78,11 +78,11 @@
     <string name="description">Сипаттама</string>
     <string name="premium">Премиум</string>
     <string name="take_full_advantage">Толық пайдаланыңыз</string>
-    <string name="coming_soon">Жақында...</string>
+    <string name="coming_soon">Жақында</string>
     <string name="child_s_name">Баланың аты</string>
     <string name="podcast">Подкаст</string>
     <string name="wishcard">Тілек картасы</string>
-    <string name="gratitude_diary">Ризашылық күнделігі</string>
+    <string name="gratitude_diary">Алғыс журналы</string>
     <string name="insights">Ойланыштар</string>
     <string name="keep_calm_and_do_meditation">Сабыр сақтап, медитация жасаңыз</string>
     <string name="menu_home">Басты бет</string>
@@ -93,6 +93,9 @@
     <string name="month">" ай"</string>
     <string name="days">" күн"</string>
     <string name="retry">Қайталап көру</string>
+    <string name="delete">Жою</string>
+    <string name="are_you_sure_you_want_to_delete">Сіз шынымен жоюды қалайсыз ба</string>
+    <string name="cancel">Cancel</string>
     <string-array name="languages">
         <item>English</item>
         <item>Қазақ</item>

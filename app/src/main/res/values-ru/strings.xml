@@ -76,13 +76,13 @@
     <string name="description">Описание</string>
     <string name="premium">Премиум</string>
     <string name="take_full_advantage">Откройте все возможности</string>
-    <string name="coming_soon">Скоро...</string>
+    <string name="coming_soon">Скоро</string>
     <string name="contact_with_specialists">Свяжитесь со специалистом</string>
     <string name="notification">Уведомления</string>
     <string name="child_s_name">Имя ребенка</string>
     <string name="podcast">Подкаст</string>
     <string name="wishcard">Карта желаний</string>
-    <string name="gratitude_diary">Дневник благодарности</string>
+    <string name="gratitude_diary">Дневник</string>
     <string name="insights">Инсайты</string>
     <string name="keep_calm_and_do_meditation">Сохраняйте спокойствие и медитируйте</string>
     <string name="menu_home">Главная</string>
@@ -93,6 +93,9 @@
     <string name="month">" мес."</string>
     <string name="days">" дн."</string>
     <string name="retry">Повторить попытку</string>
+    <string name="delete">Удалить</string>
+    <string name="are_you_sure_you_want_to_delete">Вы точно хотите удалить</string>
+    <string name="cancel">Cancel</string>
     <string-array name="languages">
         <item>English</item>
         <item>Қазақ</item>

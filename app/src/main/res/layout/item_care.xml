@@ -18,7 +18,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:background="@drawable/ic_infinity"
-        android:layout_margin="@dimen/dp_24"/>
+        android:layout_margin="@dimen/dp_24" />
 
     <TextView
         android:id="@+id/title"
@@ -31,7 +31,7 @@
         android:textSize="20sp"
         android:fontFamily="@font/sf_pro_display_medium"
         android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginStart="@dimen/dp_24"/>
+        android:layout_marginStart="@dimen/dp_24" />
 
     <TextView
         android:id="@+id/subtitle"
@@ -46,6 +46,23 @@
         android:text="Keep calm and do meditation"
         android:textColor="@color/white"
         android:textSize="13sp"
-        android:fontFamily="@font/sf_pro_display_regular"/>
+        android:fontFamily="@font/sf_pro_display_regular" />
+
+    <TextView
+        android:id="@+id/coming_soon"
+        android:visibility="invisible"
+        android:textSize="11sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/coming_soon"
+        android:text="@string/coming_soon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sf_pro_text_medium" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

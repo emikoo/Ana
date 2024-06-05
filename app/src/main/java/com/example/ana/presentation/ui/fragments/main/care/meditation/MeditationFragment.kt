@@ -54,11 +54,18 @@ class MeditationFragment : BaseFragment<FragmentMeditationBinding>(), Meditation
     }
 
     override fun onLockedSelected(meditation: Meditation) {
-        Toast.makeText(requireContext(), getString(R.string.these_sessions_are_available_only_with_premium_subscription),
-            Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.these_sessions_are_available_only_with_premium_subscription),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onUnlockedSelected(meditation: Meditation) {
-        findNavController().navigate(MeditationFragmentDirections.actionMeditationFragmentToItemMeditationFragment(0))
+        findNavController().navigate(
+            MeditationFragmentDirections.actionMeditationFragmentToItemMeditationFragment(
+                0
+            )
+        )
     }
 }

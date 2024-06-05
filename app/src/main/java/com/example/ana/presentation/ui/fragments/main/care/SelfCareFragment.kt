@@ -9,7 +9,6 @@ import com.example.ana.R
 import com.example.ana.databinding.FragmentSelfCareBinding
 import com.example.ana.presentation.ui.adapters.CareAdapter
 import com.example.ana.presentation.ui.adapters.CareSelector
-import com.example.ana.presentation.ui.fragments.main.home.HomeFragmentDirections
 import com.teenteen.teencash.presentation.base.BaseFragment
 
 class SelfCareFragment : BaseFragment<FragmentSelfCareBinding>(), CareSelector {
@@ -27,10 +26,12 @@ class SelfCareFragment : BaseFragment<FragmentSelfCareBinding>(), CareSelector {
             findNavController().navigate(SelfCareFragmentDirections.actionSelfCareFragmentToNotificationFragment())
         }
         binding.premiumView.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT)
+                .show()
         }
         binding.subscribe.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.coming_soon), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 

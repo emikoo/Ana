@@ -2,7 +2,6 @@ package com.example.ana.presentation.ui.fragments.main.profile
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -23,12 +22,10 @@ import com.example.ana.data.model.User
 import com.example.ana.databinding.FragmentProfileBinding
 import com.example.ana.presentation.extensions.updateLanguage
 import com.example.ana.presentation.ui.activity.MainActivity
-import com.example.ana.presentation.ui.fragments.main.care.wishcard.WishCardFragment
-import com.example.ana.presentation.ui.fragments.main.home.HomeFragmentDirections
 import com.example.ana.view_model.HomeViewModel
 import com.google.android.material.tabs.TabLayout
 import com.teenteen.teencash.presentation.base.BaseFragment
-import java.lang.RuntimeException
+
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private lateinit var viewModel: HomeViewModel
@@ -45,11 +42,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 false
             } else {
                 if (binding.name.text.toString().isBlank()) {
-                    Toast.makeText(requireContext(), getString(
-                        R.string.please_write_the_name_or_nickname), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(), getString(
+                            R.string.please_write_the_name_or_nickname
+                        ), Toast.LENGTH_SHORT
+                    ).show()
                     false
-                }
-                else {
+                } else {
                     saveChanges()
                     setProfileViews()
                     true
@@ -58,7 +57,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
         binding.logOut.setOnClickListener {
             progressDialog.show()
-            restart() }
+            restart()
+        }
         binding.camera.setOnClickListener { openGalleryForImage() }
         binding.btnNotification.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToNotificationFragment())
@@ -72,14 +72,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun setEditViews() {
         binding.name.isEnabled = true
-        binding.name.background.mutate().setColorFilter(resources.getColor(R.color.black), PorterDuff.Mode.SRC_ATOP)
+        binding.name.background.mutate()
+            .setColorFilter(resources.getColor(R.color.black), PorterDuff.Mode.SRC_ATOP)
         binding.card.visibility = View.VISIBLE
         binding.edit.setBackgroundResource(R.drawable.ic_save)
     }
 
     private fun setProfileViews() {
         binding.name.isEnabled = false
-        binding.name.background.mutate().setColorFilter(resources.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
+        binding.name.background.mutate()
+            .setColorFilter(resources.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.card.visibility = View.GONE
         binding.edit.setBackgroundResource(R.drawable.ic_edit)
     }
@@ -111,28 +113,52 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         tabLayout.setSelectedTabIndicatorHeight(0)
         tabLayout.setBackgroundColor(Color.parseColor("#F0EDFF"))
         tabLayout.removeAllTabs()
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.kazakh))))
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.russian))))
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(getString(R.string.english))))
+        tabLayout.addTab(
+            tabLayout.newTab().setCustomView(createTabView(getString(R.string.kazakh)))
+        )
+        tabLayout.addTab(
+            tabLayout.newTab().setCustomView(createTabView(getString(R.string.russian)))
+        )
+        tabLayout.addTab(
+            tabLayout.newTab().setCustomView(createTabView(getString(R.string.english)))
+        )
         setInitialTabSelection()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             @SuppressLint("RestrictedApi")
             override fun onTabSelected(tab: TabLayout.Tab) {
                 setSelectedTab(tab)
-                when(tab.position) {
+                when (tab.position) {
                     0 -> {
-                        PreferenceManager(requireContext()).updateLanguage("kk", requireContext(), prefs)
+                        PreferenceManager(requireContext()).updateLanguage(
+                            "kk",
+                            requireContext(),
+                            prefs
+                        )
                     }
+
                     1 -> {
-                        PreferenceManager(requireContext()).updateLanguage("ru", requireContext(), prefs)
+                        PreferenceManager(requireContext()).updateLanguage(
+                            "ru",
+                            requireContext(),
+                            prefs
+                        )
                     }
+
                     2 -> {
-                        PreferenceManager(requireContext()).updateLanguage("eng", requireContext(), prefs)
+                        PreferenceManager(requireContext()).updateLanguage(
+                            "eng",
+                            requireContext(),
+                            prefs
+                        )
                     }
                 }
                 setStrings()
             }
-            override fun onTabUnselected(tab: TabLayout.Tab) { setUnselectedTab(tab) }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                setUnselectedTab(tab)
+            }
+
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
         setInitialTabSelection()
@@ -146,10 +172,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 tabLayout.getTabAt(0)?.select()
                 setSelectedTab(tabLayout.getTabAt(0))
             }
+
             "ru" -> {
                 tabLayout.getTabAt(1)?.select()
                 setSelectedTab(tabLayout.getTabAt(1))
             }
+
             "eng" -> {
                 tabLayout.getTabAt(2)?.select()
                 setSelectedTab(tabLayout.getTabAt(2))
@@ -193,7 +221,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             binding.name.setText(it)
         }
         viewModel.photo.observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) binding.profilePicture.scaleType = ImageView.ScaleType.CENTER_CROP
+            if (!it.isNullOrEmpty()) binding.profilePicture.scaleType =
+                ImageView.ScaleType.CENTER_CROP
             else binding.profilePicture.scaleType = ImageView.ScaleType.CENTER_INSIDE
             Glide.with(this)
                 .load(it)

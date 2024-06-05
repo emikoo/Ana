@@ -49,7 +49,7 @@ object FirebaseWishCardService {
                 .collection("wish_card").document(sectionName)
                 .collection("images").document(imageId).update("image", image)
         } catch (e: Exception) {
-            Log.e(TAG, "Error updating pic" , e)
+            Log.e(TAG, "Error updating pic", e)
             FirebaseCrashlytics.getInstance().log("Error updating pic")
             FirebaseCrashlytics.getInstance().recordException(e)
         }

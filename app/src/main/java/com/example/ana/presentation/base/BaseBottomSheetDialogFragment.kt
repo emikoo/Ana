@@ -1,11 +1,7 @@
 package com.example.ana.presentation.base
 
-import android.Manifest
 import android.app.Dialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import java.io.File
 
 @Suppress("DEPRECATION")
 abstract class BaseBottomSheetDialogFragment<VB_CHILD : ViewBinding> :
@@ -47,25 +42,25 @@ abstract class BaseBottomSheetDialogFragment<VB_CHILD : ViewBinding> :
 //    }
 
     override fun onCreateView(
-        inflater: LayoutInflater ,
-        container: ViewGroup? ,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = getInflatedView(inflater , container , false)
+    ) = getInflatedView(inflater, container, false)
 
     private fun getInflatedView(
-        inflater: LayoutInflater ,
-        container: ViewGroup? ,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         attachToRoot: Boolean
     ): View {
         val tempList = mutableListOf<VB_CHILD>()
-        attachBinding(tempList , inflater , container , attachToRoot)
+        attachBinding(tempList, inflater, container, attachToRoot)
         this._binding = tempList[0]
         binding = _binding as VB_CHILD
         return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog(requireContext() , theme)
+        val dialog = BottomSheetDialog(requireContext(), theme)
         dialog.setOnShowListener { it ->
             val bottomSheetDialog = it as BottomSheetDialog
             val parentLayout =
@@ -82,8 +77,8 @@ abstract class BaseBottomSheetDialogFragment<VB_CHILD : ViewBinding> :
         return dialog
     }
 
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
-        super.onViewCreated(view , savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
         setupViews()
     }
@@ -105,9 +100,9 @@ abstract class BaseBottomSheetDialogFragment<VB_CHILD : ViewBinding> :
     }
 
     abstract fun attachBinding(
-        list: MutableList<VB_CHILD> ,
-        layoutInflater: LayoutInflater ,
-        container: ViewGroup? ,
+        list: MutableList<VB_CHILD>,
+        layoutInflater: LayoutInflater,
+        container: ViewGroup?,
         attachToRoot: Boolean
     )
 }

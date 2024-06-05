@@ -9,14 +9,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 
 abstract class BaseFlowFragment(
-    @LayoutRes layoutId: Int ,
+    @LayoutRes layoutId: Int,
     @IdRes private val navHostFragmentId: Int
 ) : Fragment(layoutId) {
 
     protected lateinit var navController: NavController
 
-    final override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
-        super.onViewCreated(view , savedInstanceState)
+    final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val navHostFragment =
             childFragmentManager.findFragmentById(navHostFragmentId) as NavHostFragment

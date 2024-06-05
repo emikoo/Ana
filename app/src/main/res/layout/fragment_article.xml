@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@string/sleep"/>
+        tools:text="@string/sleep" />
 
     <TextView
         android:id="@+id/age_of_child"
@@ -38,7 +38,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:textSize="17sp"
         android:textColor="@color/dark"
-        android:fontFamily="@font/sf_pro_text_medium"/>
+        android:fontFamily="@font/sf_pro_text_medium" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/articles_list"

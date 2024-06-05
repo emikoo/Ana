@@ -137,7 +137,7 @@ class ItemMeditationFragment : BaseFragment<FragmentItemMeditationBinding>(), So
     }
 
     override fun increaseCount(soundId: Int) {
-        viewModel.updateSessionCount(count+1)
+        viewModel.updateSessionCount(count + 1)
         viewModel.updateSoundTried(soundId)
     }
 }

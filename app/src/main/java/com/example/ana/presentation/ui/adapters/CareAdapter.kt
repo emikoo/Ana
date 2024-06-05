@@ -17,6 +17,7 @@ interface CareSelector {
     fun openWishCard()
     fun premium()
 }
+
 class CareAdapter(private val selector: CareSelector) :
     RecyclerView.Adapter<CareAdapter.CareViewHolder>() {
 
@@ -43,11 +44,21 @@ class CareAdapter(private val selector: CareSelector) :
         private val title: TextView = itemView.findViewById(R.id.title)
         private val subtitle: TextView = itemView.findViewById(R.id.subtitle)
         private val icon: ImageView = itemView.findViewById(R.id.icon)
+        private val coming: TextView = itemView.findViewById(R.id.coming_soon)
 
         fun bind(care: Care) {
             title.text = itemView.context.getString(care.title)
             subtitle.text = itemView.context.getString(care.subtitle)
             icon.setBackgroundResource(care.icon)
+            when (care.id) {
+                1, 2, 3 -> {
+                    coming.visibility = View.INVISIBLE
+                }
+
+                4, 5 -> {
+                    coming.visibility = View.VISIBLE
+                }
+            }
         }
     }
 }

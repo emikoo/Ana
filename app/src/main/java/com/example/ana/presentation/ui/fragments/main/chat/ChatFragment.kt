@@ -79,21 +79,22 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private fun setupMessageListener() {
         messageListener?.remove()
-        messageListener = db.collection("users").document(prefs.getCurrentUserId()).collection("messages")
-            .orderBy("timestampFull")
-            .addSnapshotListener { snapshots, e ->
-                if (e != null) {
-                    Log.w("ChatFragment", "listen:error", e)
-                    return@addSnapshotListener
-                }
+        messageListener =
+            db.collection("users").document(prefs.getCurrentUserId()).collection("messages")
+                .orderBy("timestampFull")
+                .addSnapshotListener { snapshots, e ->
+                    if (e != null) {
+                        Log.w("ChatFragment", "listen:error", e)
+                        return@addSnapshotListener
+                    }
 
-                for (dc in snapshots!!.documentChanges) {
-                    if (dc.type == DocumentChange.Type.ADDED) {
-                        val message = dc.document.toObject(ChatMessage::class.java)
-                        handleNewMessage(message)
+                    for (dc in snapshots!!.documentChanges) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            val message = dc.document.toObject(ChatMessage::class.java)
+                            handleNewMessage(message)
+                        }
                     }
                 }
-            }
     }
 
     private fun handleNewMessage(message: ChatMessage) {

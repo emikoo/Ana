@@ -57,15 +57,71 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     private fun setStrings() {
-        binding.title.setText(R.string.authorization)
-        binding.subtitle.setText(R.string.by_phone_number)
-        binding.textField.setHint(R.string.phone_number)
-        binding.signin.setText(R.string.sign_in)
-        binding.resend.setText(R.string.didn_t_get_the_code)
+        when (state) {
+            Screen.PHONE_NUMBER -> {
+                binding.title.setText(R.string.authorization)
+                binding.textField.setHint(R.string.phone_number)
+                binding.subtitle.setText(R.string.by_phone_number)
+                binding.signin.setText(R.string.sign_in)
+                binding.resend.setText(R.string.didn_t_get_the_code)
+            }
+            Screen.CODE -> {
+                binding.title.text = getString(R.string.type_sms_code)
+                binding.resend.setText(R.string.didn_t_get_the_code)
+                binding.subtitle.setText(R.string.a_confirmation_code_was_sent_to_the_number)
+            }
+            Screen.NAME -> {
+                binding.title.setText(R.string.authorization)
+                binding.subtitle.text = getString(R.string.what_s_your_name)
+                binding.textField.hint = getString(R.string.your_name)
+            }
+        }
         binding.policy.setText(R.string.policy)
         if (binding.error.text == getString(R.string.error_phone_number1)) {
             binding.error.setText(R.string.error_phone_number1)
         } else binding.error.text = getString(R.string.please_write_in_format)
+    }
+
+    private fun setPhoneView() {
+        state = Screen.PHONE_NUMBER
+        binding.btnBack.visibility = View.INVISIBLE
+        binding.smsCodeView.visibility = View.GONE
+        binding.textField.visibility = View.VISIBLE
+        binding.title.text = getString(R.string.authorization)
+        binding.subtitle.text = getString(R.string.by_phone_number)
+        binding.textField.hint = getString(R.string.phone_number)
+        binding.input.inputType = InputType.TYPE_CLASS_PHONE
+        binding.error.setTextColor(resources.getColor(R.color.grey))
+        binding.error.text = getString(R.string.please_write_in_format)
+        binding.error.visibility = View.VISIBLE
+        binding.resend.visibility = View.GONE
+    }
+
+    private fun setCodeView() {
+        state = Screen.CODE
+        binding.textField.visibility = View.GONE
+        binding.smsCodeView.visibility = View.VISIBLE
+        binding.btnBack.visibility = View.VISIBLE
+        binding.title.text = getString(R.string.type_sms_code)
+        binding.subtitle.text =
+            getString(R.string.a_confirmation_code_was_sent_to_the_number) + binding.input.text.toString()
+        binding.resend.visibility = View.VISIBLE
+        binding.error.visibility = View.GONE
+        progressDialog.dismiss()
+    }
+
+    private fun setNameView() {
+        state = Screen.NAME
+        binding.input.setText("")
+        binding.smsCodeView.visibility = View.GONE
+        binding.textField.visibility = View.VISIBLE
+        binding.title.text = getString(R.string.authorization)
+        binding.subtitle.text = getString(R.string.what_s_your_name)
+        binding.textField.hint = getString(R.string.your_name)
+        binding.input.inputType = InputType.TYPE_CLASS_TEXT
+        binding.error.setTextColor(resources.getColor(R.color.grey))
+        binding.resend.visibility = View.GONE
+        progressDialog.dismiss()
     }
 
     private fun setupButton() {
@@ -82,8 +138,20 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                         startPhoneNumberVerification(phoneNumber)
                         binding.input.addTextChangedListener(object : TextWatcher {
                             override fun afterTextChanged(s: Editable?) {}
-                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                            override fun beforeTextChanged(
+                                s: CharSequence?,
+                                start: Int,
+                                count: Int,
+                                after: Int
+                            ) {
+                            }
+
+                            override fun onTextChanged(
+                                s: CharSequence?,
+                                start: Int,
+                                before: Int,
+                                count: Int
+                            ) {
                                 binding.error.setTextColor(resources.getColor(R.color.grey))
                                 binding.error.text = getString(R.string.please_write_in_format)
                             }
@@ -186,48 +254,6 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         } else {
             spinner.setSelection(0)
         }
-    }
-
-    private fun setPhoneView() {
-        state = Screen.PHONE_NUMBER
-        binding.btnBack.visibility = View.INVISIBLE
-        binding.smsCodeView.visibility = View.GONE
-        binding.textField.visibility = View.VISIBLE
-        binding.title.text = getString(R.string.authorization)
-        binding.subtitle.text = getString(R.string.by_phone_number)
-        binding.textField.hint = getString(R.string.phone_number)
-        binding.input.inputType = InputType.TYPE_CLASS_PHONE
-        binding.error.setTextColor(resources.getColor(R.color.grey))
-        binding.error.text = getString(R.string.please_write_in_format)
-        binding.error.visibility = View.VISIBLE
-        binding.resend.visibility = View.GONE
-    }
-
-    private fun setCodeView() {
-        state = Screen.CODE
-        binding.textField.visibility = View.GONE
-        binding.smsCodeView.visibility = View.VISIBLE
-        binding.btnBack.visibility = View.VISIBLE
-        binding.title.text = getString(R.string.type_sms_code)
-        binding.subtitle.text =
-            getString(R.string.a_confirmation_code_was_sent_to_the_number) + binding.input.text.toString()
-        binding.resend.visibility = View.VISIBLE
-        binding.error.visibility = View.GONE
-        progressDialog.dismiss()
-    }
-
-    private fun setNameView() {
-        state = Screen.NAME
-        binding.input.setText("")
-        binding.smsCodeView.visibility = View.GONE
-        binding.textField.visibility = View.VISIBLE
-        binding.title.text = getString(R.string.authorization)
-        binding.subtitle.text = getString(R.string.what_s_your_name)
-        binding.textField.hint = getString(R.string.your_name)
-        binding.input.inputType = InputType.TYPE_CLASS_TEXT
-        binding.error.setTextColor(resources.getColor(R.color.grey))
-        binding.resend.visibility = View.GONE
-        progressDialog.dismiss()
     }
 
     private fun verifyVerificationCode(code: String) {

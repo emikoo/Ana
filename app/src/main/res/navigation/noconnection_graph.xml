@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/noconnection_graph"
     app:startDestination="@id/noConnectionFragment">
 
     <fragment
         android:id="@+id/noConnectionFragment"
-        android:name="com.example.ana.presentation.ui.fragments.noconnection.NoConnectionFragment"
-        android:label="NoConnectionFragment" >
+        android:name="com.example.ana.presentation.ui.fragments.no_connection.NoConnectionFragment"
+        android:label="NoConnectionFragment">
         <action
             android:id="@+id/action_noConnectionFragment_self"
             app:destination="@id/noConnectionFragment" />

@@ -20,7 +20,8 @@ class CustomSpinnerAdapter(context: Context, private val languages: List<String>
     }
 
     private fun createViewFromResource(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.spinner_item, parent, false)
+        val view = convertView ?: LayoutInflater.from(context)
+            .inflate(R.layout.spinner_item, parent, false)
         val language = getItem(position)
         val text = view.findViewById<TextView>(R.id.spinnerText)
         text.text = language

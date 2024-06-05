@@ -18,7 +18,10 @@ interface SoundPlayer {
     fun increaseCount(soundId: Int)
 }
 
-class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val player: SoundPlayer):  RecyclerView.Adapter<SoundSessionAdapter.SoundViewHolder>() {
+class SoundSessionAdapter(
+    private val soundList: MutableList<SoundSession>,
+    val player: SoundPlayer
+) : RecyclerView.Adapter<SoundSessionAdapter.SoundViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_sound, parent, false)
         return SoundViewHolder(view)
@@ -48,9 +51,12 @@ class SoundSessionAdapter(private val soundList: MutableList<SoundSession>, val 
                 .placeholder(R.drawable.ic_logo)
                 .into(preview)
             val time = soundSession.duration.splitToSequence(".")
-            if (time.count() == 1) duration.text = time.first() + " " + itemView.context.getString(R.string.min)
-            else duration.text = time.first() + " " + itemView.context.getString(R.string.min) + " "+ time.last() + " " + itemView.context.getString(
-                            R.string.sec)
+            if (time.count() == 1) duration.text =
+                time.first() + " " + itemView.context.getString(R.string.min)
+            else duration.text =
+                time.first() + " " + itemView.context.getString(R.string.min) + " " + time.last() + " " + itemView.context.getString(
+                    R.string.sec
+                )
             shape1.setOnClickListener {
                 if (!flag) {
                     flag = true

@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.ana.R
 import com.example.ana.data.model.Advice
 
-class ArticleAdapter(private val articles: MutableList<Advice>) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
+class ArticleAdapter(private val articles: MutableList<Advice>) :
+    RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
@@ -33,6 +34,7 @@ class ArticleAdapter(private val articles: MutableList<Advice>) : RecyclerView.A
         private val read: TextView = itemView.findViewById(R.id.read)
         private val article: TextView = itemView.findViewById(R.id.article)
         var flag = false
+
         @SuppressLint("SetTextI18n")
         fun bind(advice: Advice) {
             title.text = advice.title
@@ -48,7 +50,8 @@ class ArticleAdapter(private val articles: MutableList<Advice>) : RecyclerView.A
                 read(advice.article)
             }
         }
-        private fun read(adviceArticle: String){
+
+        private fun read(adviceArticle: String) {
             if (!flag) {
                 article.visibility = View.VISIBLE
                 article.text = adviceArticle

@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_baby"/>
+            android:src="@drawable/ic_baby" />
 
         <TextView
             android:id="@+id/name"
@@ -53,7 +53,7 @@
             android:textSize="17sp"
             android:textColor="@color/dark"
             tools:text="Arman"
-            android:fontFamily="@font/sf_pro_text_medium"/>
+            android:fontFamily="@font/sf_pro_text_medium" />
 
         <TextView
             android:id="@+id/age"
@@ -64,7 +64,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dp_8"
             android:layout_marginStart="@dimen/dp_16"
-            tools:text="2 days"/>
+            tools:text="2 days" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,8 +82,8 @@
             android:background="@drawable/bg_wish_unselected"
             android:backgroundTint="#ffffff"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/physical_activity"/>
-        
+            app:layout_constraintEnd_toStartOf="@id/physical_activity" />
+
         <ImageView
             android:id="@+id/icon1"
             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
             app:layout_constraintBottom_toBottomOf="@id/sleep"
             app:layout_constraintStart_toStartOf="@id/sleep"
             app:layout_constraintEnd_toEndOf="@id/sleep"
-            android:background="@drawable/ic_baby"/>
+            android:background="@drawable/ic_baby" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
             android:fontFamily="@font/sf_pro_text_medium"
             app:layout_constraintTop_toBottomOf="@id/icon1"
             app:layout_constraintStart_toStartOf="@id/sleep"
-            app:layout_constraintEnd_toEndOf="@id/sleep"/>
+            app:layout_constraintEnd_toEndOf="@id/sleep" />
 
         <View
             android:id="@+id/food"
@@ -116,7 +116,7 @@
             android:backgroundTint="#ffffff"
             app:layout_constraintEnd_toStartOf="@id/mental_activity"
             app:layout_constraintTop_toBottomOf="@id/sleep"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/icon2"
@@ -127,7 +127,7 @@
             app:layout_constraintBottom_toBottomOf="@id/food"
             app:layout_constraintStart_toStartOf="@id/food"
             app:layout_constraintEnd_toEndOf="@id/food"
-            android:background="@drawable/ic_baby"/>
+            android:background="@drawable/ic_baby" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
             android:fontFamily="@font/sf_pro_text_medium"
             app:layout_constraintTop_toBottomOf="@id/icon2"
             app:layout_constraintStart_toStartOf="@id/food"
-            app:layout_constraintEnd_toEndOf="@id/food"/>
+            app:layout_constraintEnd_toEndOf="@id/food" />
 
         <View
             android:id="@+id/physical_activity"
@@ -149,7 +149,7 @@
             android:background="@drawable/bg_wish_unselected"
             android:backgroundTint="#ffffff"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/sleep"/>
+            app:layout_constraintStart_toEndOf="@id/sleep" />
 
         <ImageView
             android:id="@+id/icon3"
@@ -160,7 +160,7 @@
             app:layout_constraintBottom_toBottomOf="@id/physical_activity"
             app:layout_constraintStart_toStartOf="@id/physical_activity"
             app:layout_constraintEnd_toEndOf="@id/physical_activity"
-            android:background="@drawable/ic_baby"/>
+            android:background="@drawable/ic_baby" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -172,7 +172,7 @@
             android:fontFamily="@font/sf_pro_text_medium"
             app:layout_constraintTop_toBottomOf="@id/icon3"
             app:layout_constraintStart_toStartOf="@id/physical_activity"
-            app:layout_constraintEnd_toEndOf="@id/physical_activity"/>
+            app:layout_constraintEnd_toEndOf="@id/physical_activity" />
 
         <View
             android:id="@+id/mental_activity"
@@ -183,7 +183,7 @@
             android:backgroundTint="#ffffff"
             app:layout_constraintStart_toEndOf="@id/food"
             app:layout_constraintTop_toBottomOf="@id/physical_activity"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/icon4"
@@ -194,7 +194,7 @@
             app:layout_constraintBottom_toBottomOf="@id/mental_activity"
             app:layout_constraintStart_toStartOf="@id/mental_activity"
             app:layout_constraintEnd_toEndOf="@id/mental_activity"
-            android:background="@drawable/ic_baby"/>
+            android:background="@drawable/ic_baby" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -206,6 +206,6 @@
             android:fontFamily="@font/sf_pro_text_medium"
             app:layout_constraintTop_toBottomOf="@id/icon4"
             app:layout_constraintStart_toStartOf="@id/mental_activity"
-            app:layout_constraintEnd_toEndOf="@id/mental_activity"/>
+            app:layout_constraintEnd_toEndOf="@id/mental_activity" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

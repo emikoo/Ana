@@ -16,10 +16,11 @@ object FirebaseNotificationService {
 
     suspend fun getNotifications(): List<Notification> {
         return try {
-            val child = db.collection("notifications").get().await().documents.mapNotNull { it.toNotification() }
+            val child = db.collection("notifications").get()
+                .await().documents.mapNotNull { it.toNotification() }
             child
         } catch (e: Exception) {
-            Log.e(TAG, "Error getting getNotifications" , e)
+            Log.e(TAG, "Error getting getNotifications", e)
             FirebaseCrashlytics.getInstance().log("Error getting getNotifications")
             FirebaseCrashlytics.getInstance().recordException(e)
             emptyList()
