@@ -66,14 +66,18 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 binding.resend.setText(R.string.didn_t_get_the_code)
             }
             Screen.CODE -> {
+                binding.title.setText(R.string.authorization)
                 binding.title.text = getString(R.string.type_sms_code)
-                binding.resend.setText(R.string.didn_t_get_the_code)
                 binding.subtitle.setText(R.string.a_confirmation_code_was_sent_to_the_number)
+                binding.resend.setText(R.string.didn_t_get_the_code)
+                binding.signin.setText(R.string.sign_in)
             }
             Screen.NAME -> {
                 binding.title.setText(R.string.authorization)
                 binding.subtitle.text = getString(R.string.what_s_your_name)
                 binding.textField.hint = getString(R.string.your_name)
+                binding.signin.setText(R.string.sign_in)
+
             }
         }
         binding.policy.setText(R.string.policy)
@@ -102,6 +106,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.textField.visibility = View.GONE
         binding.smsCodeView.visibility = View.VISIBLE
         binding.btnBack.visibility = View.VISIBLE
+        binding.title.text = getString(R.string.authorization)
         binding.title.text = getString(R.string.type_sms_code)
         binding.subtitle.text =
             getString(R.string.a_confirmation_code_was_sent_to_the_number) + binding.input.text.toString()
