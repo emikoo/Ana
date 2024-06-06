@@ -26,16 +26,12 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.teenteen.teencash.presentation.base.BaseFragment
 import java.util.concurrent.TimeUnit
-
-
 class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     private var storedVerificationId: String? = null
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var state = Screen.PHONE_NUMBER
     var phoneNumber = ""
     var userName = ""
-    private var isLangChanged = false
-
     enum class Screen { PHONE_NUMBER, CODE, NAME }
 
     override fun attachBinding(
@@ -101,6 +97,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         binding.resend.visibility = View.GONE
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setCodeView() {
         state = Screen.CODE
         binding.textField.visibility = View.GONE
@@ -177,7 +174,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 Screen.NAME -> {
                     userName = binding.input.text.toString()
                     prefs.setFirstTimeLaunch(PrefsSettings.USER)
-                    prefs.saveCurrentUserId("$phoneNumber")
+                    prefs.saveCurrentUserId(phoneNumber)
                     addUserToFirestore()
                     activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
                 }

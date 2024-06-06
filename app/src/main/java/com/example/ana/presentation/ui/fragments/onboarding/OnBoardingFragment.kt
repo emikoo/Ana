@@ -12,7 +12,6 @@ import com.example.ana.presentation.extensions.activityNavController
 import com.example.ana.presentation.extensions.navigateSafely
 import com.example.ana.presentation.ui.adapters.SliderAdapter
 import com.teenteen.teencash.presentation.base.BaseFragment
-
 class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     private lateinit var sliderAdapter: SliderAdapter
